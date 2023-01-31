@@ -1,6 +1,34 @@
 아래의 템플릿을 참고하여 README.md를 작성하세요.
 예시 템플릿입니다. 수정 필요.
 
+<br>
+
+# 기술 스택
+
+- 백엔드
+  - Express.js
+  - MongoDB(MongoAtlas)
+- 프론트엔드
+  - React
+- 언어
+  - JavaScript
+- 배포
+  - Nginx
+
+- Architecture
+  - MVC
+
+<br>
+
+# 코드 규칙
+- 공통
+- 백엔드
+- 프론트엔드
+
+<br>
+
+# 
+
 <hr />
 
 # (서비스 명)
