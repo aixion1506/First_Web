@@ -1,5 +1,0 @@
-/*
-    test
-*/
-
-const TEST = "test";
