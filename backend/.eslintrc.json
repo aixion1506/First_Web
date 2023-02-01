@@ -13,12 +13,15 @@
     "SharedArrayBuffer": "readonly",
     "__dirname": true
   },
+  
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
+  
   "plugins": ["prettier"],
   "rules": {
+    "linebreak-style": ["none"],
     "prettier/prettier": ["error", { "singleQuote": true }],
     // "quotes": ["error", "single", { "avoidEscape": true }]
     // "quotes": ["error", "double"]
