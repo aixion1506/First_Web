@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
-import UserSchema from "./schemas/user";
+import mongoose from 'mongoose';
+import UserSchema from './schemas/user';
 
-const User = mongoose.model("User", UserSchema);
+// export * from "./models/user-model";
 
-export { User };
+// exports.User = mongoose.model('User', UserSchema);
