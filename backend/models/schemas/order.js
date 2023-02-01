@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import { Schema } from 'mongoose';
 
 const OrderSchema = new Schema({
   orderNumber: {
@@ -34,12 +34,33 @@ const OrderSchema = new Schema({
         required: true,
       },
     }),
+    required: true,
+  },
+  shippingInfo: {
+    type: new Schema({
+      consignee: {
+        type: String,
+        required: true,
+      },
+      address: {
+        type: String,
+        required: true,
+      },
+      phoneNumber: {
+        type: Number,
+      },
+    }),
+    required: true,
   },
   orderTotalPrice: {
     type: Number,
     required: true,
-  }
+  },
+  orderStatus: {
+    type: String,
+    default: '결제 완료',
+    required: true,
+  },
 });
 
 export default OrderSchema;
-import { Schema } from "mongoose";
