@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
-import UserSchema from './schemas/user';
+import mongoose from "mongoose";
+import UserSchema from "./schemas/user";
+import ProductSchema from "./schemas/product";
 
-// export * from "./models/user-model";
-
-// exports.User = mongoose.model('User', UserSchema);
+export const User = mongoose.model("User", UserSchema);
+export const Product = mongoose.model("Product", ProductSchema);
