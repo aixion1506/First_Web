@@ -1,4 +1,4 @@
-import { Product } from "../models";
+import { Product, Category } from "../models";
 
 // 상품 추가
 export const addProductService = async productInfo => {
