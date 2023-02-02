@@ -1,10 +1,10 @@
-import { ProductService } from "../services";
+import { addProductService } from "../services/productService";
 
-const addProduct = async (req, res, next) => {
+export const addProduct = async (req, res, next) => {
   try {
     const {
       title,
-      categoryTitle,
+      categoryId,
       manufacturer,
       shortDescription,
       detailDescription,
@@ -14,9 +14,9 @@ const addProduct = async (req, res, next) => {
       searchKeywords,
     } = req.body;
 
-    const newProduct = await ProductService.addProduct({
+    const newProduct = await addProductService({
       title,
-      categoryTitle,
+      categoryId,
       manufacturer,
       shortDescription,
       detailDescription,
@@ -30,5 +30,3 @@ const addProduct = async (req, res, next) => {
     next(err);
   }
 };
-
-export { addProduct };

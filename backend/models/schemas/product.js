@@ -6,13 +6,10 @@ const ProductSchema = new Schema(
       type: String,
       required: true,
     },
-    categoryTitle: {
-      type: String,
+    categoryId: {
+      type: Schema.Types.ObjectId,
+      ref: "categorys",
       required: true,
-    },
-    categoryDescripton: {
-      type: String,
-      required: false,
     },
     manufacturer: {
       type: String,
@@ -39,6 +36,8 @@ const ProductSchema = new Schema(
     price: {
       type: Number,
       required: true,
+      default: 10000,
+      min: 0,
     },
     searchKeywords: {
       type: [String],
