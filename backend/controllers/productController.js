@@ -1,3 +1,4 @@
+
 import {
   addProductService,
   getProductsService,
@@ -5,6 +6,7 @@ import {
   getProductDataService,
   deleteProductService,
 } from "../services/productService";
+
 
 export const addProduct = async (req, res, next) => {
   try {
@@ -36,6 +38,7 @@ export const addProduct = async (req, res, next) => {
     next(err);
   }
 };
+
 
 export const getProducts = async (req, res, next) => {
   try {
@@ -75,3 +78,4 @@ export const deleteProduct = async (req, res, next) => {
     next(err);
   }
 };
+

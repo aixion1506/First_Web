@@ -1,3 +1,4 @@
+
 import { Product, Category } from "../models";
 
 // 상품 추가
@@ -14,6 +15,7 @@ export const addProductService = async productInfo => {
   const createdNewProduct = await Product.create(productInfo);
   return createdNewProduct;
 };
+
 
 // 상품 수정
 // export const updateProductService = async productId => {};

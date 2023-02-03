@@ -10,3 +10,4 @@ indexRouter.get("/", (req, res) => {
 });
 
 export { indexRouter, productRouter, categoryRouter };
+
