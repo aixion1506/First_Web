@@ -1,3 +1,4 @@
+import React from "react";
 import { SingoutWrapper } from "./signout-styled";
 
 const Signout = () => {
@@ -13,7 +14,7 @@ const Signout = () => {
               <p>현재 비밀번호</p>
               <p>
                 <input
-                  type="text"
+                  type="password"
                   placeholder="비밀번호를 입력해주세요"
                 ></input>
               </p>

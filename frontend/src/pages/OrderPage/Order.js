@@ -1,3 +1,4 @@
+import React from "react";
 import { OrderWrapper } from "./styled";
 
 const Order = () => {
