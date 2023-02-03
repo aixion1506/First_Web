@@ -15,6 +15,11 @@ export const addCategoryService = async categoryInfo => {
 };
 
 // 카테고리 목록 조회
+export const getCategoriesService = async () => {
+  const categories = await Category.find({});
+  return categories;
+};
+
 // 카테고리 수정
 // 카테고리 삭제
 // 특정 카테고리 조회
