@@ -1,7 +1,19 @@
-import {CartWrapper, CartList, PayInfo} from "./cart-styled";
+import React, {useState} from 'react';
+import {CartWrapper, CartList, PayInfo} from "./styled";
 
 const Cart = () => {
   const carts = [];
+  const [count, setCount] = useState(0);
+
+  const increase = (e) => {
+    e.preventDefault();
+    setCount((current) => current += 1)
+  }
+  const decrease = (e) => {
+    e.preventDefault();
+    setCount((current) => current -= 1);
+  }
+
   for(let i = 0; i < 5; i++) {
     const cart = (
       <li>
@@ -12,12 +24,12 @@ const Cart = () => {
           <p>HAIR BAND LOGO METALLIC NEEDLEWORK_NAVY GOLD</p>
           <p>₩280,000</p>
           <div>
-            <button>-</button>
-            <button>0</button>
-            <button>+</button>
+            <button onClick={decrease}>-</button>
+            <span>{count}</span>
+            <button onClick={increase}>+</button>
           </div> 
         </div>
-        <p>삭제</p>
+        <p>DELETE</p>
       </li>
     )
     carts.push(cart);
@@ -32,7 +44,7 @@ const Cart = () => {
           <CartList>
             <form>
               <input type="checkbox" id="allcheck" />
-              <label htmlFor="allcheck">전체선택</label>
+              <label htmlFor="allcheck">ALL</label>
               <ul>
                 {carts}
               </ul>

@@ -1,4 +1,6 @@
-import {ProductDetailWrapper, ProductInfo, ProductImg} from "./product-detail-styled";
+import React from 'react';
+import {Link} from 'react-router-dom';
+import {ProductDetailWrapper, ProductInfo, ProductImg} from "./styled";
 
 const Product = () => {
   const products = [];
@@ -29,17 +31,17 @@ const Product = () => {
             </div>
             <div>
               <select>
-                <option value="">COLOR 선택</option>
-                <option value="">COLOR 선택</option>
-                <option value="">COLOR 선택</option>
+                <option value="">COLOR SELECT</option>
+                <option value="">COLOR SELECT</option>
+                <option value="">COLOR SELECT</option>
               </select>
               <button>쇼핑백 담기</button>
-              <button>구매하기</button>
+              <Link to="/order">구매하기</Link>
             </div>
             <div>
               <p>
                 오후 2시 이전 주문 시 오늘출발 / 오늘도착<br/>
-                블랙업 공식 홈페이지 전용 서비스입니다.<br/>
+                공식 홈페이지 전용 서비스입니다.<br/>
                 추가 배송비는 발생하지 않습니다.
               </p>
             </div>
