@@ -7,3 +7,13 @@ export const SingupWrapper = styled.div`
     color: blue;
   }
 `;
+
+export const InputWrapper = styled.div`
+  background-color: gray;
+  label {
+    color: red;
+  }
+  input {
+    border-color: blue;
+  }
+`;
