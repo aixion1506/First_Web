@@ -1,3 +1,4 @@
+import React from "react";
 import { SingupWrapper } from "./styled";
 
 const Signup = () => {

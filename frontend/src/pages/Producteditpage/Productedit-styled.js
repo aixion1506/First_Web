@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ProductaddWrapper = styled.div`
+export const ProducteditWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,9 +9,22 @@ export const ProductaddWrapper = styled.div`
   > div:first-child {
     font-size: 50px;
   }
+
+  button {
+    background-color: black;
+    color: white;
+    margin: 30px;
+    font-size: 30px;
+    padding: 5px 20px;
+
+    :last-of-type {
+      background: white;
+      color: black;
+    }
+  }
 `;
 
-export const ProductaddNav = styled.div`
+export const ProducteditNav = styled.div`
   font-size: 20px;
 
   input {
