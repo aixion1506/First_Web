@@ -12,9 +12,8 @@ const OrderSchema = new Schema({
     default: Date.now,
   },
   userId: {
-    type: String,
-    // type: Schema.Types.ObjectId,
-    // ref: "users",
+    type: Schema.Types.ObjectId,
+    ref: "user",
     required: true,
   },
   orderTotalPrice: {

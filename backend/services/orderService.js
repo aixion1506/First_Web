@@ -17,10 +17,13 @@ export const getOrderUserService = async userId => {
 };
 
 export const setOrderService = async (orderId, changeInfo) => {
-  const changedOrder = await Order.update(
-    { _id: orderId },
-    { $set: changeInfo },
-  );
+  const changedOrder = await Order.updateOne({ orderId }, { $set: changeInfo });
 
   return changedOrder;
+};
+
+export const deleteOrderService = async orderId => {
+  const orderDeleted = await Order.deleteOne({ orderId });
+
+  return orderDeleted;
 };

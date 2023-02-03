@@ -1,6 +1,8 @@
 import {
   addOrderProductService,
   getOrderProductService,
+  setOrderProductService,
+  deleteOrderProductService,
 } from "../services/orderProductService";
 
 export const addOrderProduct = async (req, res, next) => {
@@ -20,7 +22,37 @@ export const addOrderProduct = async (req, res, next) => {
 
 export const getOrderProduct = async (req, res, next) => {
   try {
-    res.json("getTest");
+    const orderId = req.body.orderId;
+    const productList = await getOrderProductService(orderId);
+    res.status(200).json(productList);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const setOrderProduct = async (req, res, next) => {
+  try {
+    const orderProductId = req.params.orderProductId;
+    const { productQuantity } = req.body;
+    const changeInfo = {
+      ...(productQuantity && { productQuantity }),
+    };
+    const changedOrder = await setOrderProductService(
+      orderProductId,
+      changeInfo,
+    );
+    res.status(200).json(changedOrder);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const deleteOrderProduct = async (req, res, next) => {
+  try {
+    const orderProductId = req.params.orderProductId;
+    const deleteResult = await deleteOrderProductService(orderProductId);
+
+    res.status(200).json(deleteResult);
   } catch (err) {
     next(err);
   }

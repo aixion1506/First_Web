@@ -3,6 +3,7 @@ import {
   getOrderAdminService,
   getOrderUserService,
   setOrderService,
+  deleteOrderService,
 } from "../services/orderService";
 
 export const addOrder = async (req, res, next) => {
@@ -62,6 +63,17 @@ export const setOrder = async (req, res, next) => {
 
     const changedOrder = await setOrderService(orderId, changeInfo);
     res.status(200).json(changedOrder);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const deleteOrder = async (req, res, next) => {
+  try {
+    const orderId = req.params.orderId;
+    const deleteResult = await deleteOrderService(orderId);
+
+    res.status(200).json(deleteResult);
   } catch (err) {
     next(err);
   }
