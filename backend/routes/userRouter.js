@@ -33,7 +33,6 @@ userRouter.post("/register", async (req, res, next) => {
 });
 
 // 로그인
-
 userRouter.post("/login", async (req, res, next) => {
   try {
     // if(is.emptyObject(req.body)) {
@@ -43,6 +42,7 @@ userRouter.post("/login", async (req, res, next) => {
 
     const { email } = req.body;
     const { password } = req.body;
+    console.log(password);
 
     const result = await userService.getUserToken({ email, password });
 
@@ -59,11 +59,12 @@ userRouter.post("/logout", async (req, res) => {
 });
 
 // 유저 페이지
-userRouter.get("/:id", userController.getUser);
-export { userRouter };
+userRouter.get("/account/:id", userController.getUser);
+
+// 회원정보수정
+userRouter.patch("/details/:id", userController.editUser);
 
 // 회원탈퇴
 userRouter.delete("/signout/:id", userController.deleteUser);
 
-// 회원정보수정
-userRouter.patch("/details/:id", userController.editUser);
+export { userRouter };
