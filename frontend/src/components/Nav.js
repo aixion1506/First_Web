@@ -35,12 +35,12 @@ const NavContainer = styled.div`
   span {
     cursor: pointer;
   }
-`
+`;
 
 const LinkStyle = styled(Link)`
   display: inline-block;
   color: #000;
   text-decoration: none;
-`
+`;
 
 export default Nav;
