@@ -1,12 +1,12 @@
 import { Order } from "../models";
 
-export const addOrderService = async orderNumber => {
-  const createdNewOrder = await Order.create(orderNumber);
+export const addOrderService = async orderInfo => {
+  const createdNewOrder = await Order.create(orderInfo);
 
   return createdNewOrder;
 };
 
 export const getOrderService = async () => {
-  const text = { text: "get text" };
-  return text;
+  const orderList = await Order.find({});
+  return orderList;
 };

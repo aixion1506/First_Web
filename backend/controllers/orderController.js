@@ -27,7 +27,8 @@ export const addOrder = async (req, res, next) => {
 
 export const getOrder = async (req, res, next) => {
   try {
-    res.json("getTest");
+    const orderList = await getOrderService();
+    res.status(200).json(orderList);
   } catch (err) {
     next(err);
   }

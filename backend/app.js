@@ -4,7 +4,7 @@ import cookieParser from "cookie-parser";
 import logger from "morgan";
 import mongoose from "mongoose";
 import path from "path";
-import { indexRouter, orderRouter } from "./routes/index";
+import { indexRouter, orderRouter, orderProductRouter } from "./routes/index";
 
 const app = express();
 
@@ -25,6 +25,7 @@ app.use(express.static(path.join(dirname, "public")));
 app.use("/", indexRouter);
 // app.use('/users', usersRouter);
 app.use("/order", orderRouter);
+app.use("/order/product", orderProductRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

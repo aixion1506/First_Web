@@ -1,5 +1,6 @@
 import express from "express";
 import orderRouter from "./orderRouter";
+import orderProductRouter from "./orderProductRouter";
 
 const indexRouter = express.Router();
 
@@ -8,4 +9,4 @@ indexRouter.get("/", (req, res) => {
   res.render("index", { title: "Express" });
 });
 
-export { indexRouter, orderRouter };
+export { indexRouter, orderRouter, orderProductRouter };
