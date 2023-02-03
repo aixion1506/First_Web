@@ -27,8 +27,8 @@ export const getProductsService = async () => {
 };
 
 // 상품 카테고리별 조회
-export const getProductsByCategoryService = async categoryTitle => {
-  const category = await Category.findOne({ title: categoryTitle });
+export const getProductsByCategoryService = async title => {
+  const category = await Category.findOne({ title });
   // 카테고리가 없다면
   if (!category) {
     throw new Error("존재하지 않는 카테고리입니다.");
@@ -38,8 +38,8 @@ export const getProductsByCategoryService = async categoryTitle => {
 };
 
 // 특정 상품 조회
-export const getProductDataService = async productId => {
-  const product = await Product.findOne({ _id: productId });
+export const getProductDataService = async title => {
+  const product = await Product.findOne({ title });
   // 상품이 없다면
   if (!product) {
     throw new Error("존재하지 않는 상품입니다.");
