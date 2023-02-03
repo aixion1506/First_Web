@@ -4,7 +4,10 @@ import cookieParser from "cookie-parser";
 import logger from "morgan";
 import mongoose from "mongoose";
 import path from "path";
+import { userRouter } from "./routes/index";
+
 import { indexRouter, productRouter, categoryRouter } from "./routes";
+
 
 const app = express();
 
@@ -22,10 +25,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(dirname, "public")));
 
+app.use("/api", userRouter);
 app.use("/", indexRouter);
 // app.use('/users', usersRouter);
+
 app.use("/products", productRouter);
 app.use("/categories", categoryRouter);
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

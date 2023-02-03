@@ -1,6 +1,7 @@
 import express from "express";
 import productRouter from "./productRouter";
 import categoryRouter from "./categoryRouter";
+export * from "./auth";
 
 const indexRouter = express.Router();
 
@@ -10,3 +11,4 @@ indexRouter.get("/", (req, res) => {
 });
 
 export { indexRouter, productRouter, categoryRouter };
+
