@@ -24,7 +24,9 @@
     "nodemon": "^2.0.20",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
-    "pug": "^3.0.2"
+    "jsonwebtoken": "^9.0.0",
+    "pug": "^3.0.2",
+    "@sindresorhus/is": "^5.3.0"
   },
   "devDependencies": {
     "eslint": "^8.33.0",

@@ -1,14 +1,15 @@
 import styled from "styled-components"; 
 
 export const ProductDetailWrapper = styled.div`
-  /* width: calc(100% - 300px); */
-  width: 1280px;
-  margin: 0 auto;
+  position: relative;
+  left: 300px;
+  top: 100px;
+  width: calc(100% - 300px);
 
   & > div {
     display: flex;
     align-items: center;
-    height: 100vh;
+    height: calc(100vh - 200px);
   }
   
   & > div > div {
@@ -20,7 +21,7 @@ export const ProductDetailWrapper = styled.div`
 `;
 
 export const ProductImg = styled.div `
-  width: 60%;
+  width: 50%;
   img {
     display: block;
     width: 500px;
@@ -30,7 +31,8 @@ export const ProductImg = styled.div `
 
 export const ProductInfo = styled.div `
   flex-direction: column;
-  width: 40%;
+  padding-right: 250px;
+  width: 50%;
   div {
     width: 100%;
   }
