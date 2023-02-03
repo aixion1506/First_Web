@@ -1,1 +1,1 @@
-const mongoose = require("mongoose");
+export * from "./schemas/userModel";
