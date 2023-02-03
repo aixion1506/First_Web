@@ -1,4 +1,4 @@
-import { Schema } from 'mongoose';
+import { Schema } from "mongoose";
 
 const UserSchema = new Schema({
   email: {
@@ -26,4 +26,4 @@ const UserSchema = new Schema({
   },
 });
 
-export default UserSchema;
+export { UserSchema };
