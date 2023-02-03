@@ -1,5 +1,5 @@
-import React from "react";
-import { ProductWrapper } from "./product-styled";
+import React from 'react';
+import {ProductWrapper} from "./styled";
 
 const Product = () => {
   const products = [];

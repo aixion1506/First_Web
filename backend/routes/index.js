@@ -1,6 +1,7 @@
 import express from "express";
 import productRouter from "./productRouter";
 import categoryRouter from "./categoryRouter";
+export * from "./auth";
 
 const indexRouter = express.Router();
 

@@ -1,6 +1,6 @@
-// import { Link } from "react-router-dom";
-import React from "react";
+import React from 'react';
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faUser } from "@fortawesome/free-solid-svg-icons";
 
@@ -9,20 +9,13 @@ const Header = () => {
     <>
       <HeaderContainer>
         <LogoBox>
-          <img
-            src="https://global.mardimercredi.com/img/logo-red.png"
-            alt="LOGO"
-          />
+          <Link to="/"><img src="https://global.mardimercredi.com/img/logo-red.png" alt="LOGO" /></Link>
         </LogoBox>
         <HeaderNav>
           <ul>
-            <li>로그인</li>
-            <li>
-              <FontAwesomeIcon icon={faUser} />
-            </li>
-            <li>
-              <FontAwesomeIcon icon={faCartShopping} />
-            </li>
+            <li><LinkStyle to="/login">LOGIN</LinkStyle></li>
+            <li><LinkStyle to="/"><FontAwesomeIcon icon={faUser} /></LinkStyle></li>
+            <li><LinkStyle to="/cart"><FontAwesomeIcon icon={faCartShopping} /></LinkStyle></li>
           </ul>
         </HeaderNav>
       </HeaderContainer>
@@ -38,7 +31,8 @@ const HeaderContainer = styled.div`
   width: 100%;
   padding: 30px 40px;
   box-sizing: border-box;
-`;
+  background-color: rgba(255, 255, 255, 0.5);
+`
 const LogoBox = styled.div`
   img {
     width: 200px;
@@ -57,5 +51,10 @@ const HeaderNav = styled.div`
     }
   }
 `;
+
+const LinkStyle = styled(Link)`
+  color: #000;
+  text-decoration: none;
+`
 
 export default Header;
