@@ -1,19 +1,32 @@
 import styled from "styled-components";
 
 export const SingupWrapper = styled.div`
-  background-color: gray;
+  position: relative;
+  top: 100px;
+  left: 300px;
+  width: calc(100% - 300px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  p {
-    color: blue;
+  h1 {
+    padding-top: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
   }
 `;
 
-export const InputWrapper = styled.div`
-  background-color: gray;
-  label {
-    color: red;
-  }
-  input {
-    border-color: blue;
+export const SignupForm = styled.form`
+  width: 400px;
+`;
+
+export const GotoLogin = styled.div`
+  text-align: center;
+  margin-top: 10px;
+  transition: all 0.3s;
+
+  &:hover a {
+    opacity: 0.7;
   }
 `;
