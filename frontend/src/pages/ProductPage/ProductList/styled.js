@@ -1,14 +1,15 @@
 import styled from "styled-components"; 
 
 export const ProductWrapper = styled.div`
-  /* width: calc(100% - 300px); */
-  width: 1280px;
-  margin: 0 auto;
+  position: relative;
+  left: 300px;
+  top: 100px;
+  width: calc(100% - 300px);
 
   ul {
     display: flex;
     flex-wrap: wrap;
-    padding: 150px 100px;
+    padding: 0px 150px;
     
     li {
       width: 30%;

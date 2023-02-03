@@ -1,10 +1,10 @@
 import styled from "styled-components"; 
 
 export const CartWrapper = styled.div`
-  /* width: calc(100% - 300px); */
-  width: 1280px;
-  margin: 0 auto;
-  padding: 100px 150px;
+  position: relative;
+  left: 300px;
+  top: 100px;
+  width: calc(100% - 300px);
 
   & > div {
     display: flex;
@@ -12,6 +12,7 @@ export const CartWrapper = styled.div`
   }
 
   > div:first-child {
+    width: 90%;
     padding-bottom: 10px;
     margin-bottom: 50px;
     border-bottom: 1px solid #000;
@@ -28,8 +29,12 @@ export const CartWrapper = styled.div`
 `;
 
 export const CartList = styled.div `
-  width: 60%;
+  width: 62.5%;
   margin: 0 2.5% 0 0;
+  
+  label {
+    margin-left: 10px;
+  }
 
   ul {
     li {
@@ -52,22 +57,29 @@ export const CartList = styled.div `
         }
 
         > div {
-          margin: auto auto 0 0;
-          padding: 10px 0;
+          /* margin: auto auto 0 0;
+          padding: 10px 0; */
+          display: flex;
+          align-items: flex-end;
 
           button {
-            padding: 5px 15px;
+            width: 40px;
+            height: 40px;
             background-color: white;
             font-weight: 500;
             cursor: pointer;
             font-size: 22px;
           }
 
-          button:nth-child(2) {
+          span {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            font-size: 22px;
             background-color: black;
-            color: white;
-            border-left: none;
-            border-right: none;
+            color: #fff;
+            text-align: center;
+            line-height: 40px;
           }
         }
       }
@@ -83,8 +95,9 @@ export const CartList = styled.div `
 export const PayInfo = styled.div `
   position: sticky;
   top: 0px;
+  right: 160px;
   padding-top: 100px;
-  width: 37.5%;
+  width: 35%;
   height: 500px;
   
   p, li {
@@ -96,16 +109,21 @@ export const PayInfo = styled.div `
   }
 
   p:last-child {
-    margin: 30px 0;
+    margin: 50px 0;
+    font-size: 20px;
   }
 
   ul {
     border-top: 1px solid #000;
     border-bottom: 1px solid #000;
-    padding: 30px 0;
-    
+    padding: 50px 0;
+
+    li {
+      font-size: 20px;
+    }
+
     li:not(:last-child) {
-      margin-bottom: 30px;
+      margin-bottom: 50px;
     }
   }
 
@@ -118,7 +136,7 @@ export const PayInfo = styled.div `
     cursor: pointer;
   }
   button:last-child {
-    margin-top: 10px;
+    margin-top: 20px;
     background-color: #000;
     color: #fff;
   }
