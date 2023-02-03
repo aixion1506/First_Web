@@ -5,15 +5,13 @@ import logger from "morgan";
 import mongoose from "mongoose";
 import path from "path";
 import { userRouter } from "./routes/index";
-
-import { indexRouter, productRouter, categoryRouter } from "./routes";
-
+import { indexRouter, productRouter, categoryRouter, orderRouter, orderProductRouter } from "./routes/index";
 
 const app = express();
 
 const dirname = path.resolve();
 
-app.set("port", process.env.PORT || 8001);
+app.set("port", process.env.PORT || 8010);
 // view engine setup
 app.set("views", path.join(dirname, "views"));
 app.set("view engine", "pug");
@@ -28,10 +26,10 @@ app.use(express.static(path.join(dirname, "public")));
 app.use("/api", userRouter);
 app.use("/", indexRouter);
 // app.use('/users', usersRouter);
-
 app.use("/products", productRouter);
 app.use("/categories", categoryRouter);
-
+app.use("/order", orderRouter);
+app.use("/order/product", orderProductRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
