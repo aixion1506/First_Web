@@ -3,6 +3,7 @@ import {
   getProductsService,
   getProductsByCategoryService,
   getProductDataService,
+  deleteProductService,
 } from "../services/productService";
 
 export const addProduct = async (req, res, next) => {
@@ -60,6 +61,16 @@ export const getProductData = async (req, res, next) => {
   try {
     const productData = await getProductDataService(title);
     res.status(200).json(productData);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const deleteProduct = async (req, res, next) => {
+  const title = req.params.productTitle;
+  try {
+    const result = await deleteProductService(title);
+    res.status(200).json(result);
   } catch (err) {
     next(err);
   }

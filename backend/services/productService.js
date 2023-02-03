@@ -19,6 +19,19 @@ export const addProductService = async productInfo => {
 // export const updateProductService = async productId => {};
 
 // 상품 삭제
+export const deleteProductService = async title => {
+  const product = await Product.findOne({ title });
+  if (!product) {
+    throw new Error("존재하지 않는 상품입니다.");
+  }
+
+  const { deletedCount } = await Product.deleteOne({ _id: product.id });
+  if (deletedCount === 0) {
+    throw new Error("해당 상품이 삭제되지 않았습니다.");
+  }
+
+  return { result: "success" };
+};
 
 // 상품 전체 조회
 export const getProductsService = async () => {
