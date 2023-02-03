@@ -18,7 +18,10 @@ const Cart = () => {
     const cart = (
       <li>
         <input type="checkbox" id="" />
-        <img src="https://www.ganni.com/dw/image/v2/AAWT_PRD/on/demandware.static/-/Sites-ganni-master-catalogue/default/dw2194b9cd/images/images/packshots/K1829-554-1.jpg?sh=2000" alt="Product" />
+        <img
+          src="https://www.ganni.com/dw/image/v2/AAWT_PRD/on/demandware.static/-/Sites-ganni-master-catalogue/default/dw2194b9cd/images/images/packshots/K1829-554-1.jpg?sh=2000"
+          alt="Product"
+        />
         <div>
           <p>HAIR BAND</p>
           <p>HAIR BAND LOGO METALLIC NEEDLEWORK_NAVY GOLD</p>
@@ -31,14 +34,16 @@ const Cart = () => {
         </div>
         <p>DELETE</p>
       </li>
-    )
+    );
     carts.push(cart);
   }
   return (
     <>
       <CartWrapper>
         <div>
-          <p><span>장바구니</span> &#62; 주문결제 &#62; 주문완료 </p>
+          <p>
+            <span>장바구니</span> &#62; 주문결제 &#62; 주문완료{" "}
+          </p>
         </div>
         <div>
           <CartList>

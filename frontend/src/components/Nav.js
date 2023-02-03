@@ -41,6 +41,6 @@ const LinkStyle = styled(Link)`
   display: inline-block;
   color: #000;
   text-decoration: none;
-`
+`;
 
 export default Nav;

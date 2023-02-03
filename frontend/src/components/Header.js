@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faUser } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   return (
@@ -37,7 +37,7 @@ const LogoBox = styled.div`
   img {
     width: 200px;
   }
-`
+`;
 
 const HeaderNav = styled.div`
   ul {
@@ -50,7 +50,7 @@ const HeaderNav = styled.div`
       font-size: 20px;
     }
   }
-`
+`;
 
 const LinkStyle = styled(Link)`
   color: #000;
