@@ -14,11 +14,20 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  address: {
+  address1: {
+    type: String,
+  },
+  address2: {
     type: String,
   },
   phoneNumber: {
     type: Number,
+  },
+  zipCode: {
+    type: String,
+  },
+  city: {
+    type: String,
   },
   isAdmin: {
     type: Boolean,

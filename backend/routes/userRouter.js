@@ -2,7 +2,8 @@ import { Router } from "express";
 // eslint-disable-next-line import/no-unresolved , node/no-missing-import
 import is from "@sindresorhus/is";
 // import cookieParser from "cookie-parser";
-import { userService } from "../services/userService";
+import { userService } from "../services";
+import { userController } from "../controllers";
 
 const userRouter = Router();
 
@@ -52,8 +53,17 @@ userRouter.post("/login", async (req, res, next) => {
   }
 });
 
+// 로그아웃
 userRouter.post("/logout", async (req, res) => {
   res.clearCookie("user").end();
 });
 
+// 유저 페이지
+userRouter.get("/:id", userController.getUser);
 export { userRouter };
+
+// 회원탈퇴
+userRouter.delete("/signout/:id", userController.deleteUser);
+
+// 회원정보수정
+userRouter.patch("/details/:id", userController.editUser);
