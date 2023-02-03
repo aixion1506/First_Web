@@ -1,4 +1,4 @@
-import { Schema } from 'mongoose';
+import { Schema, SchemaType } from "mongoose";
 
 const OrderSchema = new Schema({
   orderNumber: {
@@ -11,45 +11,10 @@ const OrderSchema = new Schema({
     required: true,
     default: Date.now,
   },
-  user: {
-    type: Schema.Types.ObjectId,
-    required: true,
-  },
-  orderProducts: {
-    type: new Schema({
-      product: {
-        type: Schema.Types.ObjectId,
-        required: true,
-      },
-      productOption: {
-        type: String,
-      },
-      productQuantity: {
-        type: Number,
-        required: true,
-        default: 1,
-      },
-      productTotalPrice: {
-        type: Number,
-        required: true,
-      },
-    }),
-    required: true,
-  },
-  shippingInfo: {
-    type: new Schema({
-      consignee: {
-        type: String,
-        required: true,
-      },
-      address: {
-        type: String,
-        required: true,
-      },
-      phoneNumber: {
-        type: Number,
-      },
-    }),
+  userId: {
+    type: String,
+    // type: Schema.Types.ObjectId,
+    // ref: "users",
     required: true,
   },
   orderTotalPrice: {
@@ -58,8 +23,19 @@ const OrderSchema = new Schema({
   },
   orderStatus: {
     type: String,
-    default: '결제 완료',
+    default: "결제 완료",
     required: true,
+  },
+  consignee: {
+    type: String,
+    required: true,
+  },
+  address: {
+    type: String,
+    required: true,
+  },
+  phoneNumber: {
+    type: Number,
   },
 });
 
