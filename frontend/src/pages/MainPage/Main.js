@@ -1,13 +1,16 @@
 import React from "react";
-
 import { MainWrapper } from "./styled";
 
 const Main = () => {
   return (
     <>
       <MainWrapper>
-        Main page
-        <p>red color</p>
+        <div>
+          <img
+            src="https://global.mardimercredi.com/img/imgmain-intro-1014-2.png"
+            alt="MainImg"
+          />
+        </div>
       </MainWrapper>
     </>
   );

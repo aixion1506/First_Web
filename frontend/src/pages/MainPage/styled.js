@@ -1,9 +1,16 @@
-import styled from "styled-components";
+import styled from "styled-components"; 
 
 export const MainWrapper = styled.div`
-  background-color: aqua;
+  /* padding-left: 350px; */
+  position: relative;
+  top: 0;
+  left: 350px;
+  width: calc(100% - 350px);
 
-  p {
-    color: red;
+  img {
+    display: block;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
   }
 `;
