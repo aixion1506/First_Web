@@ -1,7 +1,7 @@
 import React from "react";
-import { ProductlistWrapper, ProductlistNav } from "./Productlist-styled";
+import { ProductlistWrapper } from "./Productlist-styled";
 
-const Main = () => {
+const Productlist = () => {
   return (
     <>
       <ProductlistWrapper>
@@ -17,4 +17,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Productlist;
