@@ -12,4 +12,5 @@ indexRouter.get("/", (req, res) => {
   res.render("index", { title: "Express" });
 });
 
-export { indexRouter, productRouter, categoryRouter, orderRouter, orderProductRouter  };
+export { indexRouter, productRouter, categoryRouter, orderRouter, orderProductRouter };
+export * from "./userRouter";
