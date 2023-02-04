@@ -1,3 +1,4 @@
+import dotenv from "dotenv";
 import createError from "http-errors";
 import express from "express";
 import cookieParser from "cookie-parser";
@@ -6,6 +7,9 @@ import mongoose from "mongoose";
 import path from "path";
 import { userRouter } from "./routes/index";
 
+// 환경변수 사용
+dotenv.config();
+const port = process.env.SERVER_PORT;
 const app = express();
 
 const dirname = path.resolve();
@@ -31,9 +35,7 @@ app.use((req, res, next) => {
 
 //  DB 만들고 연결할 주소
 
-mongoose.connect(
-  "mongodb+srv://SJL:LbEKu60xcARZVUK7@cluster0.vzygcr6.mongodb.net/shoppingMall?retryWrites=true&w=majority",
-);
+mongoose.connect(process.env.DB_URL);
 
 mongoose.connection.on("connected", () => {
   console.log("MongoDB Connected");
@@ -50,8 +52,8 @@ app.use((err, req, res) => {
   res.render("error");
 });
 
-app.listen(app.get("port"), () => {
-  console.log(app.get("port"), "번 포트에서 대기중");
+app.listen(port, () => {
+  console.log(`${port}번 포트에서 대기중 🚀`);
 });
 
 export default app;

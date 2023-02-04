@@ -44,7 +44,9 @@ class UserService {
 
     const secretKey = process.env.JWT_SECRET_KEY || "secret-key";
     // eslint-disable-next-line no-underscore-dangle
-    const token = jwt.sign({ userId: user._id, role: user.role }, secretKey);
+    const token = jwt.sign({ userId: user._id, role: user.role }, secretKey, {
+      expiresIn: "1h",
+    });
 
     const isAdmin = user.role === "admin";
 
