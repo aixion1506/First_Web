@@ -1,3 +1,4 @@
+export * from "./schemas/userModel";
 import mongoose from "mongoose";
 import UserSchema from "./schemas/user";
 import ProductSchema from "./schemas/product";
