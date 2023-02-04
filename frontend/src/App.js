@@ -14,7 +14,7 @@ import Order from "./pages/OrderPage/Order/Order";
 import Product from "./pages/ProductPage/ProductList/ProductList";
 import ProductDetail from "./pages/ProductPage/ProductDetail/ProductDetail";
 import Signup from "./pages/SignupPage/Signup";
-import CategoryManage from "./pages/AdminPage/CategoryManagePage/CategoryManage";
+import CategoryManage from "./pages/Adminpage/CategoryManagePage/CategoryManage";
 import MyAccount from "./pages/MyAccountPage/MyAccount";
 import MyDetails from "./pages/MyAccountPage/MyDetailsPage/MyDetails";
 import OrderHistory from "./pages/MyAccountPage/OrderHistoryPage/OrderHistory";
