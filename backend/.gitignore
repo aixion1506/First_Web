@@ -11,6 +11,7 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 .yarn.lock*
+.yarn.lock*
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
@@ -21,7 +22,8 @@ pids
 *.seed
 *.pid.lock
 
-
+# Eslint 해정님만 올리기
+.eslintrc.json
 
 .DS_Store
 
@@ -148,6 +150,4 @@ dist
 
 # End of https://www.toptal.com/developers/gitignore/api/node
  Save
-
-# eslint
-.eslintrc.json
+.env
