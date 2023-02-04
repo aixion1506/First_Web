@@ -1,3 +1,4 @@
+import dotenv from "dotenv";
 import createError from "http-errors";
 import express from "express";
 import cookieParser from "cookie-parser";
@@ -5,15 +6,27 @@ import logger from "morgan";
 import mongoose from "mongoose";
 import path from "path";
 import { userRouter } from "./routes/index";
+import createError from "http-errors";
+import express from "express";
+import cookieParser from "cookie-parser";
+import logger from "morgan";
+import mongoose from "mongoose";
+import path from "path";
+import { userRouter } from "./routes/index";
+import { indexRouter, productRouter, categoryRouter, orderRouter, orderProductRouter } from "./routes/index";
 
-import { indexRouter, productRouter, categoryRouter } from "./routes";
-
-
+// 환경변수 사용
+dotenv.config();
+const port = process.env.SERVER_PORT;
 const app = express();
 
 const dirname = path.resolve();
 
-app.set("port", process.env.PORT || 8001);
+const dirname = path.resolve();
+
+const dirname = path.resolve();
+
+app.set("port", process.env.PORT || 8010);
 // view engine setup
 app.set("views", path.join(dirname, "views"));
 app.set("view engine", "pug");
@@ -28,10 +41,10 @@ app.use(express.static(path.join(dirname, "public")));
 app.use("/api", userRouter);
 app.use("/", indexRouter);
 // app.use('/users', usersRouter);
-
 app.use("/products", productRouter);
 app.use("/categories", categoryRouter);
-
+app.use("/order", orderRouter);
+app.use("/order/product", orderProductRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -39,12 +52,12 @@ app.use((req, res, next) => {
 });
 
 //  DB 만들고 연결할 주소
-//
 
-mongoose.connect(
-  "mongodb+srv://SJL:LbEKu60xcARZVUK7@cluster0.vzygcr6.mongodb.net/shoppingMall?retryWrites=true&w=majority",
-);
+mongoose.connect(process.env.DB_URL);
 
+mongoose.connection.on("connected", () => {
+  console.log("MongoDB Connected");
+});
 mongoose.connection.on("connected", () => {
   console.log("MongoDB Connected");
 });
@@ -60,8 +73,9 @@ app.use((err, req, res) => {
   res.render("error");
 });
 
-app.listen(app.get("port"), () => {
-  console.log(app.get("port"), "번 포트에서 대기중");
+app.listen(port, () => {
+  console.log(`${port}번 포트에서 대기중 🚀`);
 });
 
+export default app;
 export default app;
