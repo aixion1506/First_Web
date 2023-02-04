@@ -7,7 +7,6 @@ import Cart from "./pages/CartPage/Cart";
 import Login from "./pages/LoginPage/Login";
 import Main from "./pages/MainPage/Main";
 import Signout from "./pages/Signoutpage/Signout";
-import Admin from "./pages/Adminpage/Admin";
 import Productadd from "./pages/Productaddpage/Productadd";
 import Productedit from "./pages/Producteditpage/Productedit";
 import Order from "./pages/OrderPage/Order/Order";
@@ -19,6 +18,7 @@ import MyAccount from "./pages/MyAccountPage/MyAccount";
 import MyDetails from "./pages/MyAccountPage/MyDetailsPage/MyDetails";
 import OrderHistory from "./pages/MyAccountPage/OrderHistoryPage/OrderHistory";
 import Productlist from "./pages/Productlistpage/Productlist";
+import Admin from "./pages/AdminPage/Admin";
 
 function App() {
   return (
