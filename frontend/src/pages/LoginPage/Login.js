@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 
 import { Link } from "react-router-dom";
 import { useCallback } from "react";
@@ -6,12 +6,27 @@ import { LoginWrapper, LoginForm, GotoSingup } from "./styled";
 import { InputWrapper, Button } from "../../components/common-styled";
 import { LayoutWrapper } from "../../components/common-styled";
 
-const Login = () => {
-  const loginSubmit = useCallback((e) => {
-    e.preventDefault();
+/** 로그인 할 때도 유효성 검사가 필요한가????... */
 
-    console.log("login");
-  }, []);
+const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const passwordRef = useRef();
+
+  const loginSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+
+      const loginUser = {
+        email,
+        password,
+      };
+
+      console.log("로그인", loginUser);
+    },
+    [email, password]
+  );
 
   return (
     <LayoutWrapper>
@@ -20,11 +35,22 @@ const Login = () => {
         <LoginForm onSubmit={loginSubmit}>
           <InputWrapper>
             <label>EMAIL</label>
-            <input type="email" required />
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </InputWrapper>
           <InputWrapper>
             <label>PASSWORD</label>
-            <input type="password" required />
+            <input
+              type="password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              ref={passwordRef}
+            />
           </InputWrapper>
           <Button>LOG IN</Button>
           <GotoSingup>

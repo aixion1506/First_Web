@@ -11,6 +11,7 @@ export const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 40px;
+  position: relative;
 
   label {
     font-size: 18px;

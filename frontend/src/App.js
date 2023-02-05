@@ -3,22 +3,23 @@ import { Route, Routes } from "react-router-dom";
 import { Reset } from "styled-reset";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
-import Cart from "./pages/CartPage/Cart";
-import Login from "./pages/LoginPage/Login";
-import Main from "./pages/MainPage/Main";
-import Signout from "./pages/Signoutpage/Signout";
-import Productadd from "./pages/Productaddpage/Productadd";
-import Productedit from "./pages/Producteditpage/Productedit";
-import Order from "./pages/OrderPage/Order/Order";
-import Product from "./pages/ProductPage/ProductList/ProductList";
-import ProductDetail from "./pages/ProductPage/ProductDetail/ProductDetail";
-import Signup from "./pages/SignupPage/Signup";
-import CategoryManage from "./pages/AdminPage/CategoryManagePage/CategoryManage";
-import MyAccount from "./pages/MyAccountPage/MyAccount";
-import MyDetails from "./pages/MyAccountPage/MyDetailsPage/MyDetails";
-import OrderHistory from "./pages/MyAccountPage/OrderHistoryPage/OrderHistory";
-import Productlist from "./pages/Productlistpage/Productlist";
-import Admin from "./pages/AdminPage/Admin";
+// import Cart from "./pages/CartPage/Cart";
+// import Login from "./pages/LoginPage/Login";
+// import Main from "./pages/MainPage/Main";
+// import Signout from "./pages/Signoutpage/Signout";
+// import Productadd from "./pages/Productaddpage/Productadd";
+// import Productedit from "./pages/Producteditpage/Productedit";
+// import Order from "./pages/OrderPage/Order/Order";
+// import Product from "./pages/ProductPage/ProductList/ProductList";
+// import ProductDetail from "./pages/ProductPage/ProductDetail/ProductDetail";
+// import Signup from "./pages/SignupPage/Signup";
+// import CategoryManage from "./pages/AdminPage/CategoryManagePage/CategoryManage";
+// import MyAccount from "./pages/MyAccountPage/MyAccount";
+// import MyDetails from "./pages/MyAccountPage/MyDetailsPage/MyDetails";
+// import OrderHistory from "./pages/MyAccountPage/OrderHistoryPage/OrderHistory";
+// import Productlist from "./pages/Productlistpage/Productlist";
+// import Admin from "./pages/AdminPage/Admin";
+import { ROUTE_ARR } from "./routes/route";
 
 function App() {
   return (
@@ -27,6 +28,13 @@ function App() {
       <Nav />
       <Header />
       <Routes>
+        {ROUTE_ARR.map((route, index) => {
+          return (
+            <Route path={route.path} element={<route.element />} key={index} />
+          );
+        })}
+      </Routes>
+      {/* <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
@@ -43,7 +51,7 @@ function App() {
         <Route path="/myaccount/mydetails" element={<MyDetails />} />
         <Route path="/myaccount/orderhistory" element={<OrderHistory />} />
         <Route path="/productlist" element={<Productlist />} />
-      </Routes>
+      </Routes> */}
     </>
   );
 }
