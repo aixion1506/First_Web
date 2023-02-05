@@ -1,11 +1,12 @@
+// eslint-disable-next-line import/no-unresolved, node/no-missing-import
 import is from "@sindresorhus/is";
 import { userService } from "../services";
 
 class UserController {
   async getUser(req, res, next) {
     try {
-      const { id } = req.params;
-      console.log(req.currentUserInfo, "req.currentUserInfo");
+      const id = req.userId;
+
       const currentUserInfo = await userService.getUserDetail(id);
       res.status(200).json(currentUserInfo);
     } catch (error) {
@@ -26,6 +27,7 @@ class UserController {
 
   async editUser(req, res, next) {
     try {
+      console.log(is.emptyArray(req.body), "test");
       if (is.emptyObject(req.body)) {
         throw new Error(
           "headers의 Content-Type을 application/json으로 설정해주세요",
