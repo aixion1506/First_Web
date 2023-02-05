@@ -13,7 +13,7 @@ class UserService {
 
     const user = await this.userModel.findByEmail(email);
     if (user) {
-      throw new Error("this email is already in use");
+      throw new Error("이미 사용중인 이메일 입니다.");
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -28,7 +28,7 @@ class UserService {
 
     const user = await this.userModel.findByEmail(email);
     if (!user) {
-      throw new Error("email 또는 패스워드가 일치하지 않습니다.");
+      throw new Error("이메일이 일치하지 않습니다.");
     }
 
     const correctPasswordHash = user.password;
@@ -38,17 +38,17 @@ class UserService {
     );
 
     if (!isPasswordCorrect) {
-      throw new Error("email 또는 패스워드가 일치하지 않습니다.");
+      throw new Error("패스워드가 일치하지 않습니다.");
     }
 
     const secretKey = process.env.JWT_SECRET_KEY || "secret-key";
     // eslint-disable-next-line no-underscore-dangle
 
     // eslint-disable-next-line no-underscore-dangle
-    const token = jwt.sign({ userId: user._id, pe: user.role }, secretKey, {
+    const token = jwt.sign({ userId: user._id, pe: user.isAdmin }, secretKey, {
       expiresIn: "1h",
     });
-    const isAdmin = user.role === true;
+    const isAdmin = user.isAdmin === true;
 
     return { token, isAdmin };
   }

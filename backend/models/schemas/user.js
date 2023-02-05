@@ -29,7 +29,7 @@ const UserSchema = new Schema({
   city: {
     type: String,
   },
-  role: {
+  isAdmin: {
     type: Boolean,
     required: true,
     default: false,

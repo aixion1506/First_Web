@@ -13,14 +13,14 @@ import {
   orderRouter,
   orderProductRouter,
 } from "./routes";
-
+import { errorHandler } from "./middleware";
 // 환경변수 사용
 dotenv.config();
 const port = process.env.SERVER_PORT;
 const app = express();
 
 const dirname = path.resolve();
-
+console.log(dirname, "dirname");
 app.set("port", process.env.PORT || 8010);
 // view engine setup
 app.set("views", path.join(dirname, "views"));
@@ -45,7 +45,6 @@ app.use((req, res, next) => {
   next(createError(404));
 });
 //  DB 만들고 연결할 주소
-
 mongoose.connect(process.env.DB_URL);
 
 mongoose.connection.on("connected", () => {
@@ -53,15 +52,7 @@ mongoose.connection.on("connected", () => {
 });
 
 // error handler
-app.use((err, req, res) => {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render("error");
-});
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`${port}번 포트에서 대기중 🚀`);
