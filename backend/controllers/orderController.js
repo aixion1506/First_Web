@@ -42,7 +42,7 @@ export const getOrderAdmin = async (req, res, next) => {
 
 export const getOrderUser = async (req, res, next) => {
   try {
-    const userId = req.body.userId;
+    const { userId } = req.body;
     const orderList = await getOrderUserService(userId);
     res.status(200).json(orderList);
   } catch (err) {
@@ -52,7 +52,7 @@ export const getOrderUser = async (req, res, next) => {
 
 export const setOrder = async (req, res, next) => {
   try {
-    const orderId = req.params.orderId;
+    const { orderId } = req.params;
     const { orderStatus, consignee, address, phoneNumber } = req.body;
     const changeInfo = {
       ...(orderStatus && { orderStatus }),
@@ -70,7 +70,7 @@ export const setOrder = async (req, res, next) => {
 
 export const deleteOrder = async (req, res, next) => {
   try {
-    const orderId = req.params.orderId;
+    const { orderId } = req.params;
     const deleteResult = await deleteOrderService(orderId);
 
     res.status(200).json(deleteResult);
