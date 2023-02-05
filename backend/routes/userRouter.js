@@ -3,12 +3,11 @@ import { Router } from "express";
 import is from "@sindresorhus/is";
 import { userService } from "../services";
 import { userController } from "../controllers";
-import { loginRequired, isAdmin } from "../middleware";
+import { loginRequired } from "../middleware";
 
 const userRouter = Router();
 
 // 회원가입
-
 userRouter.post("/register", async (req, res, next) => {
   try {
     if (is.emptyObject(req.body)) {
@@ -16,16 +15,12 @@ userRouter.post("/register", async (req, res, next) => {
         "headers의 Content-Type을 application/json으로 설정해주세요",
       );
     }
-    const { name } = req.body;
-    const { email } = req.body;
-    const { password } = req.body;
-
+    const { name, email, password } = req.body;
     const newUser = await userService.addUser({
       name,
       email,
       password,
     });
-
     res.status(201).json(newUser);
   } catch (error) {
     next(error);
@@ -35,10 +30,12 @@ userRouter.post("/register", async (req, res, next) => {
 // 로그인
 userRouter.post("/login", async (req, res, next) => {
   try {
-    const { email } = req.body;
-    const { password } = req.body;
-    console.log(password);
-
+    if (is.emptyObject(req.body)) {
+      throw new Error(
+        "headers의 Content-Type을 application/json으로 설정해주세요",
+      );
+    }
+    const { email, password } = req.body;
     const result = await userService.getUserToken({ email, password });
 
     res.status(200).json(result);
@@ -57,9 +54,9 @@ userRouter.post("/logout", async (req, res) => {
 userRouter.get("/account/:id", loginRequired, userController.getUser);
 
 // 회원정보수정
-userRouter.patch("/details/:id", userController.editUser);
+userRouter.patch("/details/:id", loginRequired, userController.editUser);
 
 // 회원탈퇴
-userRouter.delete("/signout/:id", userController.deleteUser);
+userRouter.delete("/signout/:id", loginRequired, userController.deleteUser);
 
 export default userRouter;
