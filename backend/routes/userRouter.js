@@ -1,9 +1,9 @@
 import { Router } from "express";
 // eslint-disable-next-line import/no-unresolved , node/no-missing-import
 import is from "@sindresorhus/is";
-// import cookieParser from "cookie-parser";
 import { userService } from "../services";
 import { userController } from "../controllers";
+import { loginRequired, isAdmin } from "../middleware";
 
 const userRouter = Router();
 
@@ -35,11 +35,6 @@ userRouter.post("/register", async (req, res, next) => {
 // 로그인
 userRouter.post("/login", async (req, res, next) => {
   try {
-    // if(is.emptyObject(req.body)) {
-    //   throw new Error{
-    //   }
-    // }
-
     const { email } = req.body;
     const { password } = req.body;
     console.log(password);
@@ -47,7 +42,7 @@ userRouter.post("/login", async (req, res, next) => {
     const result = await userService.getUserToken({ email, password });
 
     res.status(200).json(result);
-    console.log("토큰생성");
+    console.log("토큰생성", result);
   } catch (error) {
     next(error);
   }
@@ -59,7 +54,7 @@ userRouter.post("/logout", async (req, res) => {
 });
 
 // 유저 페이지
-userRouter.get("/account/:id", userController.getUser);
+userRouter.get("/account/:id", loginRequired, userController.getUser);
 
 // 회원정보수정
 userRouter.patch("/details/:id", userController.editUser);
@@ -67,4 +62,4 @@ userRouter.patch("/details/:id", userController.editUser);
 // 회원탈퇴
 userRouter.delete("/signout/:id", userController.deleteUser);
 
-export { userRouter };
+export default userRouter;

@@ -24,12 +24,9 @@ class UserController {
 
   async editUser(req, res, next) {
     try {
-      // params로부터 id를 가져옴
       const { id } = req.params;
-      // body data 로부터 업데이트할 사용자 정보를 추출함.
-      const { name, email } = req.body;
-      // 사용자 정보를 업데이트함.
-      const editUserInfo = await userService.setUser(id, { name, email });
+      const { name, email, role } = req.body;
+      const editUserInfo = await userService.setUser(id, { name, email, role });
 
       res.status(200).json(editUserInfo);
     } catch (error) {
