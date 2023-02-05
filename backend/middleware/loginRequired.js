@@ -24,7 +24,9 @@ const loginRequired = (req, res, next) => {
       return;
     }
     const userInfo = jwt.verify(token, secretKey);
+    req.userId = userInfo.userId;
     res.locals.user = userInfo;
+
     next();
   } catch (error) {
     res.status(401).json({

@@ -51,7 +51,7 @@ userRouter.post("/logout", async (req, res) => {
 });
 
 // 유저 페이지
-userRouter.get("/account/:id", loginRequired, userController.getUser);
+userRouter.get("/account/", loginRequired, userController.getUser);
 
 // 회원정보수정
 userRouter.patch("/details/:id", loginRequired, userController.editUser);
