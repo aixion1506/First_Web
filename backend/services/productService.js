@@ -1,4 +1,3 @@
-
 import { Product, Category } from "../models";
 
 class ProductService {

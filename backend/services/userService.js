@@ -24,12 +24,11 @@ class UserService {
   }
 
   async getUserToken(loginInfo) {
-    // 객체 destructuring
     const { email, password } = loginInfo;
 
     const user = await this.userModel.findByEmail(email);
     if (!user) {
-      throw new Error("no email");
+      throw new Error("email 또는 패스워드가 일치하지 않습니다.");
     }
 
     const correctPasswordHash = user.password;
@@ -39,16 +38,17 @@ class UserService {
     );
 
     if (!isPasswordCorrect) {
-      throw new Error("password does not match");
+      throw new Error("email 또는 패스워드가 일치하지 않습니다.");
     }
 
     const secretKey = process.env.JWT_SECRET_KEY || "secret-key";
     // eslint-disable-next-line no-underscore-dangle
-    const token = jwt.sign({ userId: user._id, role: user.role }, secretKey, {
+
+    // eslint-disable-next-line no-underscore-dangle
+    const token = jwt.sign({ userId: user._id, pe: user.role }, secretKey, {
       expiresIn: "1h",
     });
-
-    const isAdmin = user.role === "admin";
+    const isAdmin = user.role === true;
 
     return { token, isAdmin };
   }
@@ -73,12 +73,15 @@ class UserService {
     return user;
   }
 
+  async getUsers() {
+    const users = await this.userModel.findAll();
+    return users;
+  }
+
   // 유저정보 수정, 현재 비밀번호가 있어야 수정 가능함.
-  async setUser(userId, { name, email }) {
+  async setUser(userId, { name, email, role }) {
     // 해당 id의 유저 존재 유무 확인
-    console.log({ name, email }, "service");
     let user = await this.userModel.findById(userId);
-    console.log("service", userId);
 
     // 해당 유저가 존재하지않으면, 에러 메시지 반환
     if (!user) {
@@ -93,7 +96,7 @@ class UserService {
     // 업데이트 진행
     user = await this.userModel.update({
       userId,
-      update: { name, email },
+      update: { name, email, role },
     });
 
     return user;
