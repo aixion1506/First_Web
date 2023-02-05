@@ -79,7 +79,12 @@ class UserService {
   }
 
   // 유저정보 수정, 현재 비밀번호가 있어야 수정 가능함.
-  async setUser(userId, { name, email, role }) {
+  async setUser(
+    userInfo,
+    { name, password, address1, address2, zipCode, city, phoneNumber },
+  ) {
+    const { userId, currentPassword } = userInfo;
+
     // 해당 id의 유저 존재 유무 확인
     let user = await this.userModel.findById(userId);
 
@@ -88,15 +93,33 @@ class UserService {
       throw new Error("가입 내역이 없습니다.");
     }
 
-    // 비밀번호 일치 여부 확인 추가 필요
-    // 비밀번호도 변경하는 경우에는 해쉬화 해주어야 함.
+    // 비밀번호 일치 여부 확인
+    const currentPasswordHash = user.password;
+    const matchPassword = await bcrypt.compare(
+      currentPassword,
+      currentPasswordHash,
+    );
 
+    if (!matchPassword) {
+      throw new Error("현재 비밀번호와 일치하지 않습니다.");
+    }
     // 정보 수정
-
+    let changePasswordHash;
+    if (password) {
+      changePasswordHash = await bcrypt.hash(password, 10);
+    }
     // 업데이트 진행
     user = await this.userModel.update({
       userId,
-      update: { name, email, role },
+      update: {
+        name,
+        address1,
+        address2,
+        zipCode,
+        city,
+        phoneNumber,
+        password: changePasswordHash,
+      },
     });
 
     return user;
