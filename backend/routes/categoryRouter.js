@@ -15,7 +15,6 @@ categoryRouter.get(
   "/categories/:categoryTitle",
   categoryController.getCategory,
 );
-// categoryRouter.patch("/:categoryTitle", setCategory);
 categoryRouter.delete(
   "/categories/:categoryTitle",
   isAdmin,

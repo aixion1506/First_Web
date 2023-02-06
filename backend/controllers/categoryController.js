@@ -1,8 +1,21 @@
+import is from "@sindresorhus/is";
+import { validationResult } from "express-validator";
 import { categoryService } from "../services";
 
 class CategoryController {
   async addCategory(req, res, next) {
     try {
+      if (is.emptyObject(req.body)) {
+        throw new Error("json으로 content-type 설정 필요");
+      }
+
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        const error = new Error("Validation fail, entered data is incorrect.");
+        error.status(400);
+        throw error;
+      }
+
       const { title } = req.body;
       const newCategory = await categoryService.addCategory({ title });
       res.status(201).json(newCategory);
@@ -32,6 +45,17 @@ class CategoryController {
 
   async setCategory(req, res, next) {
     try {
+      if (is.emptyObject(req.body)) {
+        throw new Error("json으로 contetn-type 설정 필요");
+      }
+
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        const error = new Error("Validation fail, entered data is incorrect.");
+        error.status(400);
+        throw error;
+      }
+
       const { categoryTitle } = req.params;
       const { title } = req.body;
       const result = await categoryService.setCategory(categoryTitle, title);

@@ -4,6 +4,7 @@ const ProductSchema = new Schema({
   title: {
     type: String,
     required: true,
+    trim: true,
   },
   categoryId: {
     type: Schema.Types.ObjectId,
@@ -13,18 +14,22 @@ const ProductSchema = new Schema({
   manufacturer: {
     type: String,
     required: true,
+    trim: true,
   },
   shortDescription: {
     type: String,
     required: true,
+    trim: true,
   },
   detailDescription: {
     type: String,
     required: true,
+    trim: true,
   },
   imageUrl: {
     type: String,
     required: true,
+    trim: true,
   },
   inventory: {
     type: Number,
