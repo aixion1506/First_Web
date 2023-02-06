@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
+import logger from "./logger";
 
-// Authorization 헤더의 bearer schema
 const loginRequired = (req, res, next) => {
   if (req.headers.authorization === undefined) {
     res.status(403).json({
@@ -13,7 +13,7 @@ const loginRequired = (req, res, next) => {
     const secretKey = process.env.JWT_SECRET_KEY || "secret-key";
     const token = req.headers.authorization.slice(7);
     if (!token || token === "null") {
-      console.log(
+      logger.info(
         "서비스 사용 요청이 있습니다.하지만, Authorization 토큰: 없음",
       );
 
