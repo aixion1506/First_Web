@@ -8,7 +8,7 @@ import { isAdmin } from "../middleware";
 const adminRouter = Router();
 
 // 전체 사용자 목록을 얻음
-adminRouter.get("/", isAdmin, async (req, res, next) => {
+adminRouter.get("/admin/userlist", isAdmin, async (req, res, next) => {
   try {
     const users = await userService.getUsers();
 
