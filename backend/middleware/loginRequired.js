@@ -2,13 +2,14 @@ import jwt from "jsonwebtoken";
 import logger from "./logger";
 
 const loginRequired = (req, res, next) => {
+  // authorization 검증
   if (req.headers.authorization === undefined) {
     res.status(403).json({
-      error: "로그인이 필요합니다.",
+      error: "로그인이 필요 서비스입니다.",
       data: null,
     });
   }
-
+  // 토큰 검증
   try {
     const secretKey = process.env.JWT_SECRET_KEY || "secret-key";
     const token = req.headers.authorization.slice(7);
