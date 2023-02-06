@@ -1,6 +1,5 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
-import {ProductDetailWrapper, ProductInfo, ProductImg} from "./styled";
+import React from "react";
+import { ProductDetailWrapper, ProductInfo, ProductImg } from "./styled";
 
 const Product = () => {
   const products = [];
@@ -37,12 +36,12 @@ const Product = () => {
             </div>
             <div>
               <select>
-                <option value="">COLOR SELECT</option>
-                <option value="">COLOR SELECT</option>
-                <option value="">COLOR SELECT</option>
+                <option value="">COLOR 선택</option>
+                <option value="">COLOR 선택</option>
+                <option value="">COLOR 선택</option>
               </select>
               <button>쇼핑백 담기</button>
-              <Link to="/order">구매하기</Link>
+              <button>구매하기</button>
             </div>
             <div>
               <p>
