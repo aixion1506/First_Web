@@ -1,3 +1,4 @@
+import { renderFile } from "pug";
 import { Product, Category } from "../models";
 
 class ProductService {
@@ -8,13 +9,18 @@ class ProductService {
 
   // 상품 추가
   async addProduct(productInfo) {
-    const { title } = productInfo;
+    const { title, categoryId } = productInfo;
 
     // 상품 중복 확인
     const founded = await this.productModel.findOne({ title });
     if (founded) {
-      throw new Error("이미 존재하는 상품입니다.");
+      throw new Error(`${title} 상품이 존재합니다.`);
     }
+
+    const category = await this.categoryModel.findOne({
+      title: categoryId,
+    });
+    productInfo.categoryId = category.id;
 
     // DB 저장
     const createdNewProduct = await this.productModel.create(productInfo);
@@ -22,23 +28,52 @@ class ProductService {
   }
 
   // 상품 수정
-  // async updateProduct(productId) {};
+  async setProduct(title, toUpdateInfo) {
+    const product = await this.productModel.findOne({ title });
+    if (!product) {
+      throw new Error(`${title} 상품이 존재하지 않습니다.`);
+    }
+
+    if (toUpdateInfo.title !== title) {
+      const founded = await this.productModel.findOne({
+        title: toUpdateInfo.title,
+      });
+
+      if (founded) {
+        throw new Error(
+          `${toUpdateInfo.title} 이름의 상품이 존재합니다. 다른 이름으로 수정해주세요.`,
+        );
+      }
+    }
+
+    const updated = await this.productModel.updateOne(
+      { title },
+      { $set: toUpdateInfo },
+    );
+
+    let result = `수정이 완료 되었습니다.`;
+    if (updated.modifiedCount === 0) {
+      result = `수정된 내용이 없습니다.`;
+    }
+
+    return result;
+  }
 
   // 상품 삭제
   async deleteProduct(title) {
     const product = await this.productModel.findOne({ title });
     if (!product) {
-      throw new Error("존재하지 않는 상품입니다.");
+      throw new Error(`${title} 상품이 존재하지 않습니다.`);
     }
 
     const { deletedCount } = await this.productModel.deleteOne({
       _id: product.id,
     });
     if (deletedCount === 0) {
-      throw new Error("해당 상품이 삭제되지 않았습니다.");
+      throw new Error(`${title} 상품 삭제에 실패했습니다.`);
     }
 
-    return { result: "success" };
+    return { result: `${title} 상품 삭제 완료` };
   }
 
   // 상품 전체 조회
@@ -52,7 +87,7 @@ class ProductService {
     const category = await this.categoryModel.findOne({ title });
     // 카테고리가 없다면
     if (!category) {
-      throw new Error("존재하지 않는 카테고리입니다.");
+      throw new Error(`${title} 카테고리가 존재하지 않습니다.`);
     }
     const products = await this.productModel.find({ categoryId: category.id });
     return products;
@@ -63,13 +98,10 @@ class ProductService {
     const product = await this.productModel.findOne({ title });
     // 상품이 없다면
     if (!product) {
-      throw new Error("존재하지 않는 상품입니다.");
+      throw new Error(`${title} 상품이 존재하지 않습니다.`);
     }
     return product;
   }
-
-  // 상품 목록
-  // 상품 상세
 }
 
 const productService = new ProductService(Product, Category);
