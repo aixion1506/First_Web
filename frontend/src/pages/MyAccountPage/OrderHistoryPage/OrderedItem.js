@@ -13,19 +13,18 @@ const OrderedItem = (item) => {
     return changed.replace(".", "");
   };
 
-  const cancelOrder = useCallback(() => {
+  const cancelOrder = () => {
     if (confirm("주문을 취소하시겠습니까?")) {
       console.log(item.id, "주문 취소");
       return alert("주문이 취소되었습니다.");
     }
-  }, []);
-
-  const refundRequest = useCallback(() => {
+  };
+  const refundRequest = () => {
     if (confirm("환불 신청하시겠습니까?")) {
       console.log(item.id, "환불 신청");
       return alert("환불 신청이 완료되었습니다.");
     }
-  }, []);
+  };
 
   return (
     <>
