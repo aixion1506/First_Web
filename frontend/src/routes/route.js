@@ -62,8 +62,8 @@ export const ROUTE = {
     element: Product,
   },
   PRODUCTDETAIL: {
-    path: "/productDetail",
-    link: "/productDetail",
+    path: "/product/detail",
+    link: "/product/detail",
     element: ProductDetail,
   },
   CategoryManage: {
