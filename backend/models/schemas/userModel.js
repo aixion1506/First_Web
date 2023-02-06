@@ -31,7 +31,6 @@ export class UserModel {
 
   async update({ userId, update }) {
     const filter = { _id: userId };
-    console.log(update, "models");
     const updatedUser = await User.update(filter, { $set: update });
     return updatedUser;
   }

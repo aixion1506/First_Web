@@ -22,7 +22,7 @@ export const addOrderProduct = async (req, res, next) => {
 
 export const getOrderProduct = async (req, res, next) => {
   try {
-    const orderId = req.body.orderId;
+    const { orderId } = req.body;
     const productList = await getOrderProductService(orderId);
     res.status(200).json(productList);
   } catch (err) {
@@ -32,7 +32,7 @@ export const getOrderProduct = async (req, res, next) => {
 
 export const setOrderProduct = async (req, res, next) => {
   try {
-    const orderProductId = req.params.orderProductId;
+    const { orderProductId } = req.params;
     const { productQuantity } = req.body;
     const changeInfo = {
       ...(productQuantity && { productQuantity }),
@@ -49,7 +49,7 @@ export const setOrderProduct = async (req, res, next) => {
 
 export const deleteOrderProduct = async (req, res, next) => {
   try {
-    const orderProductId = req.params.orderProductId;
+    const { orderProductId } = req.params;
     const deleteResult = await deleteOrderProductService(orderProductId);
 
     res.status(200).json(deleteResult);
