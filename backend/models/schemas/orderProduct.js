@@ -1,4 +1,4 @@
-import { Schema, SchemaType } from "mongoose";
+import { Schema } from "mongoose";
 
 const OrderProductSchema = new Schema({
   orderId: {

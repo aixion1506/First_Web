@@ -1,59 +1,45 @@
-import {
-  addOrderProductService,
-  getOrderProductService,
-  setOrderProductService,
-  deleteOrderProductService,
-} from "../services/orderProductService";
+import orderProductService from "../services/orderProductService";
 
-export const addOrderProduct = async (req, res, next) => {
-  try {
-    const { orderId, productId, productQuantity } = req.body;
+class OrderProductController {
+  async addOrderProduct(req, res, next) {
+    try {
+      const { orderId, productId, productQuantity } = req.body;
 
-    const newOrderProduct = await addOrderProductService({
-      orderId,
-      productId,
-      productQuantity,
-    });
-    res.status(201).json(newOrderProduct);
-  } catch (err) {
-    next(err);
+      const newOrderProduct = await orderProductService.addOrderProduct({
+        orderId,
+        productId,
+        productQuantity,
+      });
+      res.status(201).json(newOrderProduct);
+    } catch (err) {
+      next(err);
+    }
   }
-};
 
-export const getOrderProduct = async (req, res, next) => {
-  try {
-    const orderId = req.body.orderId;
-    const productList = await getOrderProductService(orderId);
-    res.status(200).json(productList);
-  } catch (err) {
-    next(err);
+  async getOrderProduct(req, res, next) {
+    try {
+      const { orderId } = req.params;
+      const productList = await orderProductService.getOrderProduct(orderId);
+      res.status(200).json(productList);
+    } catch (err) {
+      next(err);
+    }
   }
-};
 
-export const setOrderProduct = async (req, res, next) => {
-  try {
-    const orderProductId = req.params.orderProductId;
-    const { productQuantity } = req.body;
-    const changeInfo = {
-      ...(productQuantity && { productQuantity }),
-    };
-    const changedOrder = await setOrderProductService(
-      orderProductId,
-      changeInfo,
-    );
-    res.status(200).json(changedOrder);
-  } catch (err) {
-    next(err);
+  async deleteOrderProduct(req, res, next) {
+    try {
+      const { orderId } = req.params;
+      const deleteResult = await orderProductService.deleteOrderProduct(
+        orderId,
+      );
+
+      res.status(200).json(deleteResult);
+    } catch (err) {
+      next(err);
+    }
   }
-};
+}
 
-export const deleteOrderProduct = async (req, res, next) => {
-  try {
-    const orderProductId = req.params.orderProductId;
-    const deleteResult = await deleteOrderProductService(orderProductId);
+const orderProductController = new OrderProductController();
 
-    res.status(200).json(deleteResult);
-  } catch (err) {
-    next(err);
-  }
-};
+export default orderProductController;
