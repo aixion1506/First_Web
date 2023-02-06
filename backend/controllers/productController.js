@@ -1,8 +1,21 @@
+import is from "@sindresorhus/is";
+import { validationResult } from "express-validator";
 import { productService } from "../services";
 
 class ProductController {
   async addProduct(req, res, next) {
     try {
+      if (is.emptyObject(req.body)) {
+        throw new Error("json으로 contetn-type 설정 필요");
+      }
+
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        const error = new Error("Validation fail, entered data is incorrect.");
+        error.status(400);
+        throw error;
+      }
+
       const {
         title,
         categoryId,
@@ -26,6 +39,7 @@ class ProductController {
         price,
         searchKeywords,
       });
+
       res.status(201).json(newProduct);
     } catch (err) {
       next(err);
@@ -34,6 +48,17 @@ class ProductController {
 
   async setProduct(req, res, next) {
     try {
+      if (is.emptyObject(req.body)) {
+        throw new Error("json으로 contetn-type 설정 필요");
+      }
+
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        const error = new Error("Validation fail, entered data is incorrect.");
+        error.status(400);
+        throw error;
+      }
+
       const { productTitle } = req.params;
       const {
         title,
@@ -46,6 +71,7 @@ class ProductController {
         price,
         searchKeywords,
       } = req.body;
+
       const result = await productService.setProduct(productTitle, {
         title,
         categoryId,
