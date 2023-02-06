@@ -1,6 +1,5 @@
 import { Schema } from "mongoose";
 
-
 const ProductSchema = new Schema({
   title: {
     type: String,
@@ -44,6 +43,5 @@ const ProductSchema = new Schema({
     required: true,
   },
 });
-
 
 export default ProductSchema;

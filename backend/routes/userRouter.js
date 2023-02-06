@@ -1,70 +1,25 @@
 import { Router } from "express";
 // eslint-disable-next-line import/no-unresolved , node/no-missing-import
-import is from "@sindresorhus/is";
-// import cookieParser from "cookie-parser";
-import { userService } from "../services";
 import { userController } from "../controllers";
+import { loginRequired } from "../middleware";
 
 const userRouter = Router();
-
 // 회원가입
-
-userRouter.post("/register", async (req, res, next) => {
-  try {
-    if (is.emptyObject(req.body)) {
-      throw new Error(
-        "headers의 Content-Type을 application/json으로 설정해주세요",
-      );
-    }
-    const { name } = req.body;
-    const { email } = req.body;
-    const { password } = req.body;
-
-    const newUser = await userService.addUser({
-      name,
-      email,
-      password,
-    });
-
-    res.status(201).json(newUser);
-  } catch (error) {
-    next(error);
-  }
-});
+userRouter.post("/register", userController.register);
 
 // 로그인
-userRouter.post("/login", async (req, res, next) => {
-  try {
-    // if(is.emptyObject(req.body)) {
-    //   throw new Error{
-    //   }
-    // }
-
-    const { email } = req.body;
-    const { password } = req.body;
-    console.log(password);
-
-    const result = await userService.getUserToken({ email, password });
-
-    res.status(200).json(result);
-    console.log("토큰생성");
-  } catch (error) {
-    next(error);
-  }
-});
+userRouter.post("/login", userController.login);
 
 // 로그아웃
-userRouter.post("/logout", async (req, res) => {
-  res.clearCookie("user").end();
-});
+userRouter.post("/logout", loginRequired, userController.logout);
 
 // 유저 페이지
-userRouter.get("/account/:id", userController.getUser);
+userRouter.get("/account/", loginRequired, userController.getUser);
 
 // 회원정보수정
-userRouter.patch("/details/:id", userController.editUser);
+userRouter.patch("/details/:userId", loginRequired, userController.editUser);
 
 // 회원탈퇴
-userRouter.delete("/signout/:id", userController.deleteUser);
+userRouter.delete("/signout/:id", loginRequired, userController.deleteUser);
 
-export { userRouter };
+export default userRouter;
