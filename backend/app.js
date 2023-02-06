@@ -35,8 +35,8 @@ app.use(express.static(path.join(dirname, "public")));
 
 app.use("/api", userRouter);
 app.use("/admin", adminRouter);
-app.use("/products", productRouter);
-app.use("/categories", categoryRouter);
+app.use("/api", productRouter);
+app.use("/api", categoryRouter);
 app.use("/order", orderRouter);
 app.use("/order/product", orderProductRouter);
 
