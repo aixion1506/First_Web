@@ -37,7 +37,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(dirname, "public")));
 
 app.use("/api", userRouter);
-app.use("/admin", adminRouter);
+app.use("/api", adminRouter);
 app.use("/api", productRouter);
 app.use("/api", categoryRouter);
 app.use("/order", orderRouter);
