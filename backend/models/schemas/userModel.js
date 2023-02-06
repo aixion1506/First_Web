@@ -1,5 +1,5 @@
 import { model } from "mongoose";
-import { UserSchema } from "./user";
+import UserSchema from "./user";
 
 const User = model("users", UserSchema);
 
@@ -17,4 +17,4 @@ export class UserModel {
 
 const userModel = new UserModel();
 
-export { userModel };
+export default User;

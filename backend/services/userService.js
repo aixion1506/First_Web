@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { userModel } from "../models/schemas/userModel";
+import userModel from "../models/schemas/userModel";
 
 class UserService {
   // eslint-disable-next-line no-shadow

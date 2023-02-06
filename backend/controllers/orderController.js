@@ -1,80 +1,72 @@
-import {
-  addOrderService,
-  getOrderAdminService,
-  getOrderUserService,
-  setOrderService,
-  deleteOrderService,
-} from "../services/orderService";
+import orderService from "../services/orderService";
 
-export const addOrder = async (req, res, next) => {
-  try {
-    const {
-      orderNumber,
-      userId,
-      orderTotalPrice,
-      consignee,
-      address,
-      phoneNumber,
-    } = req.body;
+class OrderController {
+  async addOrder(req, res, next) {
+    try {
+      const { orderNumber, userId, consignee, address, phoneNumber } = req.body;
 
-    const newOrder = await addOrderService({
-      orderNumber,
-      userId,
-      orderTotalPrice,
-      consignee,
-      address,
-      phoneNumber,
-    });
-    res.status(201).json(newOrder);
-  } catch (err) {
-    next(err);
+      const newOrder = await orderService.addOrder({
+        orderNumber,
+        userId,
+        consignee,
+        address,
+        phoneNumber,
+      });
+      res.status(201).json(newOrder);
+    } catch (err) {
+      next(err);
+    }
   }
-};
 
-export const getOrderAdmin = async (req, res, next) => {
-  try {
-    const orderList = await getOrderAdminService();
-    res.status(200).json(orderList);
-  } catch (err) {
-    next(err);
+  async getOrderAdmin(req, res, next) {
+    try {
+      const orderList = await orderService.getOrderAdmin();
+      res.status(200).json(orderList);
+    } catch (err) {
+      next(err);
+    }
   }
-};
 
-export const getOrderUser = async (req, res, next) => {
-  try {
-    const userId = req.body.userId;
-    const orderList = await getOrderUserService(userId);
-    res.status(200).json(orderList);
-  } catch (err) {
-    next(err);
+  async getOrderUser(req, res, next) {
+    try {
+      const { userId } = req.body;
+      const orderList = await orderService.getOrderUser(userId);
+      res.status(200).json(orderList);
+    } catch (err) {
+      next(err);
+    }
   }
-};
 
-export const setOrder = async (req, res, next) => {
-  try {
-    const orderId = req.params.orderId;
-    const { orderStatus, consignee, address, phoneNumber } = req.body;
-    const changeInfo = {
-      ...(orderStatus && { orderStatus }),
-      ...(consignee && { consignee }),
-      ...(address && { address }),
-      ...(phoneNumber && { phoneNumber }),
-    };
+  async setOrder(req, res, next) {
+    try {
+      const { orderNumber } = req.params;
+      const { status, consignee, address, phoneNumber } = req.body;
+      const changeInfo = {
+        ...(status && { status }),
+        ...(consignee && { consignee }),
+        ...(address && { address }),
+        ...(phoneNumber && { phoneNumber }),
+      };
 
-    const changedOrder = await setOrderService(orderId, changeInfo);
-    res.status(200).json(changedOrder);
-  } catch (err) {
-    next(err);
+      const changedOrder = await orderService.setOrder(orderNumber, changeInfo);
+      res.status(200).json(changedOrder);
+    } catch (err) {
+      next(err);
+    }
   }
-};
 
-export const deleteOrder = async (req, res, next) => {
-  try {
-    const orderId = req.params.orderId;
-    const deleteResult = await deleteOrderService(orderId);
+  async deleteOrder(req, res, next) {
+    try {
+      const { orderNumber } = req.params;
+      const deleteResult = await orderService.deleteOrder(orderNumber);
 
-    res.status(200).json(deleteResult);
-  } catch (err) {
-    next(err);
+      res.status(200).json(deleteResult);
+    } catch (err) {
+      next(err);
+    }
   }
-};
+}
+
+const orderController = new OrderController();
+
+export default orderController;

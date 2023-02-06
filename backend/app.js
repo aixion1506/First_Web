@@ -5,7 +5,13 @@ import logger from "morgan";
 import mongoose from "mongoose";
 import path from "path";
 import { userRouter } from "./routes/index";
-import { indexRouter, productRouter, categoryRouter, orderRouter, orderProductRouter } from "./routes/index";
+import {
+  indexRouter,
+  productRouter,
+  categoryRouter,
+  orderRouter,
+  orderProductRouter,
+} from "./routes/index";
 
 const app = express();
 
@@ -28,8 +34,8 @@ app.use("/", indexRouter);
 // app.use('/users', usersRouter);
 app.use("/products", productRouter);
 app.use("/categories", categoryRouter);
-app.use("/order", orderRouter);
-app.use("/order/product", orderProductRouter);
+app.use("/api/order", orderRouter);
+app.use("/api/order/product", orderProductRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
