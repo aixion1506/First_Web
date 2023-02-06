@@ -1,7 +1,7 @@
 import Cart from "../pages/CartPage/Cart";
 import Login from "../pages/LoginPage/Login";
 import Main from "../pages/MainPage/Main";
-import Signout from "../pages/Signoutpage/Signout";
+import DeleteAccount from "../pages/DeleteAccountPage/DeleteAccount";
 import Productadd from "../pages/Productaddpage/Productadd";
 import Productedit from "../pages/Producteditpage/Productedit";
 import Order from "../pages/OrderPage/Order/Order";
@@ -32,9 +32,9 @@ export const ROUTE = {
     element: Signup,
   },
   SIGNOUT: {
-    path: "/signout",
-    link: "/signout",
-    element: Signout,
+    path: "/deleteaccount",
+    link: "/deleteaccount",
+    element: DeleteAccount,
   },
   CART: {
     path: "/cart",
