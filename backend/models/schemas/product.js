@@ -22,7 +22,7 @@ const ProductSchema = new Schema({
     type: String,
     required: true,
   },
-  imageKey: {
+  imageUrl: {
     type: String,
     required: true,
   },
@@ -35,7 +35,6 @@ const ProductSchema = new Schema({
   price: {
     type: Number,
     required: true,
-    default: 10000,
     min: 0,
   },
   searchKeywords: {
