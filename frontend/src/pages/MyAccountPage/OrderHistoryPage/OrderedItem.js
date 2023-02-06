@@ -7,6 +7,10 @@ import {
   ItemInfoWrapper,
 } from "./orderhistory-styled";
 
+/** 주문 상태에 따라 주문취소, 환불신청으로 나뉘는데 그거 데이터 처리 어떻게 할건지?
+ * api분리해서 따로 요청 해서 하는지?
+ */
+
 const OrderedItem = (item) => {
   const timeFormat = (time) => {
     const changed = time.replaceAll(". ", "-");
@@ -19,6 +23,7 @@ const OrderedItem = (item) => {
       return alert("주문이 취소되었습니다.");
     }
   };
+
   const refundRequest = () => {
     if (confirm("환불 신청하시겠습니까?")) {
       console.log(item.id, "환불 신청");

@@ -19,7 +19,7 @@ export const TitleWrapper = styled.div`
   }
 `;
 
-export const DetailFormWrapper = styled.div`
+export const DetailFormWrapper = styled.form`
   flex-grow: 1;
   width: 600px;
   margin-right: 40px;
