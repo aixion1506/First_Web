@@ -14,7 +14,7 @@ import {
   orderRouter,
   orderProductRouter,
 } from "./routes";
-import { errorHandler, errorLogger } from "./middleware";
+import { errorHandler, errorLogger, validatorErrorChecker } from "./middleware";
 
 // 환경변수 사용
 dotenv.config();
@@ -38,8 +38,8 @@ app.use(express.static(path.join(dirname, "public")));
 
 app.use("/api", userRouter);
 app.use("/api", adminRouter);
-app.use("/api", productRouter);
-app.use("/api", categoryRouter);
+app.use("/api", validatorErrorChecker, productRouter);
+app.use("/api", validatorErrorChecker, categoryRouter);
 app.use("/order", orderRouter);
 app.use("/order/product", orderProductRouter);
 
