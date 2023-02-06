@@ -1,5 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import cors from "cors";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import mongoose from "mongoose";
@@ -23,6 +25,9 @@ const dirname = path.resolve();
 console.log(dirname, "dirname");
 app.set("port", process.env.PORT || 8010);
 
+// CORS 에러 방지
+app.use(cors());
+
 // logger (morgan)
 app.use(morgan("dev"));
 
@@ -38,7 +43,7 @@ app.use("/categories", categoryRouter);
 app.use("/order", orderRouter);
 app.use("/order/product", orderProductRouter);
 
-//  DB 만들고 연결할 주소
+// DB 만들고 연결할 주소
 mongoose.connect(process.env.DB_URL);
 
 mongoose.connection.on("connected", () => {
