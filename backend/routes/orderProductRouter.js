@@ -3,10 +3,16 @@ import orderProductController from "../controllers/orderProductController";
 
 const orderProductRouter = express.Router();
 
-orderProductRouter.post("/", orderProductController.addOrderProduct);
-orderProductRouter.get("/:orderId", orderProductController.getOrderProduct);
+orderProductRouter.post(
+  "/order/product",
+  orderProductController.addOrderProduct,
+);
+orderProductRouter.get(
+  "/order/product/:orderId",
+  orderProductController.getOrderProduct,
+);
 orderProductRouter.delete(
-  "/:orderId",
+  "/order/product/:orderId",
   orderProductController.deleteOrderProduct,
 );
 

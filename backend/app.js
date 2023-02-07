@@ -40,8 +40,8 @@ app.use("/api", userRouter);
 app.use("/api", adminRouter);
 app.use("/api", productRouter);
 app.use("/api", categoryRouter);
-app.use("/api/order", orderRouter);
-app.use("/api/order/product", orderProductRouter);
+app.use("/api", orderRouter);
+app.use("/api", orderProductRouter);
 
 // DB 만들고 연결할 주소
 mongoose.connect(process.env.DB_URL);

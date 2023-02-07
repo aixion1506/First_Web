@@ -3,10 +3,10 @@ import orderController from "../controllers/orderController";
 
 const orderRouter = express.Router();
 
-orderRouter.post("/", orderController.addOrder);
-orderRouter.get("/", orderController.getOrderAdmin);
-orderRouter.get("/user", orderController.getOrderUser);
-orderRouter.patch("/:orderNumber", orderController.setOrder);
-orderRouter.delete("/:orderNumber", orderController.deleteOrder);
+orderRouter.post("/order", orderController.addOrder);
+orderRouter.get("/order", orderController.getOrderAdmin);
+orderRouter.get("/order/user", orderController.getOrderUser);
+orderRouter.patch("/order/:orderNumber", orderController.setOrder);
+orderRouter.delete("/order/:orderNumber", orderController.deleteOrder);
 
 export default orderRouter;
