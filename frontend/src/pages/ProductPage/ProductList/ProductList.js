@@ -10,7 +10,7 @@ const Product = () => {
         const response = await axios.get("http://localhost:8001/api/products");
         const products = response.data;
         setProductList(products);
-      } catch(err) {
+      } catch (err) {
         console.log(`ERROR: ${err}`);
       }
     })();
@@ -20,11 +20,11 @@ const Product = () => {
     <>
       <ProductWrapper>
         <ul>
-          { 
+          {
             productList.map(item => {
               return (
                 <li key={item._id}>
-                  <LinkStyle to={`/product/detail?title=${item.title}&imgurl=${item.imageUrl}&price=${item.price}`}>
+                  <LinkStyle to={`/product/detail/${item._id}`}>
                     <img
                       src={item.imageUrl}
                       alt={`Product ${item.title}`}
@@ -36,7 +36,7 @@ const Product = () => {
                         {
                           item.price
                         }
-                        </span>
+                      </span>
                     </div>
                   </LinkStyle>
                 </li>

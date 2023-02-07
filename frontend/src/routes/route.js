@@ -40,6 +40,7 @@ export const ROUTE = {
     path: "/cart",
     link: "/cart",
     element: Cart,
+
   },
   PRODUCTADD: {
     path: "/productadd",
@@ -62,8 +63,8 @@ export const ROUTE = {
     element: Product,
   },
   PRODUCTDETAIL: {
-    path: "/productDetail",
-    link: "/productDetail",
+    path: "/product/detail/:id",
+    link: "/product/detail/:id",
     element: ProductDetail,
   },
   CategoryManage: {
