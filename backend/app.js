@@ -23,7 +23,7 @@ const port = process.env.SERVER_PORT;
 const app = express();
 const dirname = path.resolve();
 console.log(dirname, "dirname");
-app.set("port", process.env.PORT || 8010);
+app.set("port", process.env.PORT || 8001);
 
 // CORS 에러 방지
 app.use(cors());
