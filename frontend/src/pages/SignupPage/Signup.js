@@ -3,11 +3,12 @@ import { useCallback } from "react";
 import { SingupWrapper, SignupForm, InvalidMessage, GotoLogin } from "./styled";
 import { InputWrapper, Button } from "../../components/common-styled";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 /**
  * 유효성검사
  * 비밀번호 8자 이상
- * 이름 한글 2자 이상
+ * 이름 한글 2자 이상 6글자 이하
  * 이메일 유효성
  */
 
@@ -60,10 +61,34 @@ const Signup = () => {
     }
   }, [password, passwordConfirm]);
 
+  /** 회원가입 */
+  const register = () => {
+    axios
+      .post("http://localhost:8001/api/users/register", {
+        name,
+        email,
+        password,
+      })
+      .then((res) => {
+        console.log("jwt", res.data);
+        // localStorage.setItem("token", res.data.token);
+      })
+      .catch((err) => {
+        console.log("Error", err);
+      });
+  };
+
   /** 회원가입 제출 */
   const signupSubmit = useCallback(
     (e) => {
       e.preventDefault();
+
+      if (!isNameValid) {
+        return nameRef.current.focus();
+      }
+      if (!isEmailValid) {
+        return emailRef.current.focus();
+      }
 
       if (isNameValid && isEmailValid && isPwMatch) {
         console.log(
@@ -74,13 +99,7 @@ const Signup = () => {
           passwordConfirm,
           isPwMatch
         );
-      }
-
-      if (!isNameValid) {
-        return nameRef.current.focus();
-      }
-      if (!isEmailValid) {
-        return emailRef.current.focus();
+        return register();
       }
     },
     [name, email, password, passwordConfirm]
@@ -89,6 +108,7 @@ const Signup = () => {
   return (
     <SingupWrapper>
       <h1>SIGN UP</h1>
+      {/* <button onClick={register}>test button</button> */}
       <SignupForm onSubmit={signupSubmit}>
         <InputWrapper>
           <label>NAME</label>
@@ -98,6 +118,7 @@ const Signup = () => {
             value={name}
             onChange={checkName}
             ref={nameRef}
+            placeholder="이름을 입력하세요(2 - 6글자)"
           />
           {name
             ? isNameValid || (
@@ -113,6 +134,7 @@ const Signup = () => {
             value={email}
             onChange={checkEmail}
             ref={emailRef}
+            placeholder="이메일을 입력하세요"
           />
           {email
             ? isEmailValid || (
@@ -128,6 +150,7 @@ const Signup = () => {
             minLength="8"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="비밀번호를 입력하세요(8글자 이상)"
           />
         </InputWrapper>
         <InputWrapper>
@@ -139,6 +162,7 @@ const Signup = () => {
             value={passwordConfirm}
             onChange={(e) => setPasswordConfirm(e.target.value)}
             ref={pwRef}
+            placeholder="비밀번호를 한 번 더 입력하세요"
           />
           {isPwMatch || (
             <InvalidMessage>{InvalidMessages.password}</InvalidMessage>
