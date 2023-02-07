@@ -1,28 +1,44 @@
-import React from 'react';
-import {ProductWrapper} from "./styled";
+import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import { ProductWrapper, LinkStyle } from "./styled";
 
 const Product = () => {
-  const products = [];
-  for (let i = 0; i < 12; i++) {
-    const product = (
-      <li>
-        <img
-          src="https://www.ganni.com/dw/image/v2/AAWT_PRD/on/demandware.static/-/Sites-ganni-master-catalogue/default/dw2194b9cd/images/images/packshots/K1829-554-1.jpg?sh=2000"
-          alt="Product"
-        />
-        <div>
-          <p>Graphic V-neck Vest</p>
-          <span>₩280,000</span>
-        </div>
-      </li>
-    );
-    products.push(product);
-  }
+  const [productList, setProductList] = useState([]);
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await axios.get("https://vercel-express-pied-kappa.vercel.app/prod?pageNumber=1&pageSize=50");
+        const products = response.data.content;
+        setProductList(products);
+      } catch(err) {
+        console.log(`ERROR: ${err}`);
+      }
+    })();
+  }, []);
 
   return (
     <>
       <ProductWrapper>
-        <ul>{products}</ul>
+        <ul>
+          { 
+            productList.map(item => {
+              return (
+                <li key={item.prodId}>
+                  <LinkStyle to={`/product/detail?name=${item.prodName}&imgsrc=${item.prodImageUrl}`}>
+                    <img
+                      src={item.prodImageUrl}
+                      alt={`Product ${item.prodName}`}
+                    />
+                    <div>
+                      <p>{item.prodName}</p>
+                      <span>₩280,000</span>
+                    </div>
+                  </LinkStyle>
+                </li>
+              )
+            })
+          }
+        </ul>
       </ProductWrapper>
     </>
   );
