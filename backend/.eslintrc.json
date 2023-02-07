@@ -6,6 +6,7 @@
   },
   // "extends": ["airbnb-base", "prettier", "plugin:node/recommended"],
   "extends": ["airbnb-base", "plugin:node/recommended", "prettier"],
+  // "extends": [],
 
   "globals": {
     "Atomics": "readonly",
@@ -20,14 +21,17 @@
 
   "rules": {
     // "linebreak-style": ["error", "windows"],
-    "linebreak-style": ["none"],
-    "prettier/prettier": ["error", { "singleQuote": false, "endOfLine": "auto" }],
+    "linebreak-style": 0,
+    "prettier/prettier": [
+      "error",
+      { "singleQuote": false, "endOfLine": "auto" }
+    ],
+    "import/prefer-default-export": "off",
     "no-unused-vars": "warn",
     "no-console": "off",
     "func-names": "off",
     "no-plusplus": "off",
     "no-process-exit": "off",
-    "class-methods-use-this": "off",
-    "import/prefer-default-export": "off"
+    "class-methods-use-this": "off"
   }
 }
