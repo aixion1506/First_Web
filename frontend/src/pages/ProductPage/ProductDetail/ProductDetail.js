@@ -1,10 +1,10 @@
 import React from "react";
-import { ProductDetailWrapper, ProductInfo, ProductImg } from "./styled";
-import SelectBox from "./SelectBox";
+import { ProductDetailWrapper, ProductInfo, ProductImg } from "./product-styled";
+import RadioBox from "./RadioBox";
 import queryString from "query-string";
 const Product = () => {
   const qs = queryString.parse(window.location.search);
-  const OPTIONS = ["small", "medium", "large", "xlarge", "xxlarge"];
+  const size = {type: "size", option: ["small", "medium", "large", "xlarge", "xxlarge"]};
   console.log(qs);
   return (
     <>
@@ -12,17 +12,18 @@ const Product = () => {
         <div>
           <ProductImg>
             <img
-              src={qs.imgsrc}
-              alt="Product"
+              src={qs.imgurl}
+              alt={`Product ${qs.title}`}
             />
           </ProductImg>
           <ProductInfo>
             <div>
-              <p>{qs.name}</p>
-              <span>₩280,000</span>
+              <p>{qs.title}</p>
+              <span>₩{qs.price}</span>
             </div>
             <div>
-              <SelectBox options={OPTIONS} />
+              {/* <RadioBox options={size} /> */}
+              <RadioBox options={size} />
               <button>쇼핑백 담기</button>
               <button>구매하기</button>
             </div>

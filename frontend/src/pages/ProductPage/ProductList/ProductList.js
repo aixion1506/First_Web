@@ -7,8 +7,8 @@ const Product = () => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await axios.get("https://vercel-express-pied-kappa.vercel.app/prod?pageNumber=1&pageSize=50");
-        const products = response.data.content;
+        const response = await axios.get("http://localhost:8001/api/products");
+        const products = response.data;
         setProductList(products);
       } catch(err) {
         console.log(`ERROR: ${err}`);
@@ -23,15 +23,20 @@ const Product = () => {
           { 
             productList.map(item => {
               return (
-                <li key={item.prodId}>
-                  <LinkStyle to={`/product/detail?name=${item.prodName}&imgsrc=${item.prodImageUrl}`}>
+                <li key={item._id}>
+                  <LinkStyle to={`/product/detail?title=${item.title}&imgurl=${item.imageUrl}&price=${item.price}`}>
                     <img
-                      src={item.prodImageUrl}
-                      alt={`Product ${item.prodName}`}
+                      src={item.imageUrl}
+                      alt={`Product ${item.title}`}
                     />
                     <div>
-                      <p>{item.prodName}</p>
-                      <span>₩280,000</span>
+                      <p>{item.title}</p>
+                      <span>
+                        ₩
+                        {
+                          item.price
+                        }
+                        </span>
                     </div>
                   </LinkStyle>
                 </li>

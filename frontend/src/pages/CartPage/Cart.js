@@ -25,6 +25,7 @@ const Cart = () => {
         <div>
           <p>HAIR BAND</p>
           <p>HAIR BAND LOGO METALLIC NEEDLEWORK_NAVY GOLD</p>
+          <p>SIZE SMALL</p>
           <p>₩280,000</p>
           <div>
             <button onClick={decrease}>-</button>
