@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ROUTE } from "../../../routes/route";
 import {
   MyDetailsWrapper,
@@ -14,6 +14,8 @@ import {
   Button,
 } from "../../../components/common-styled";
 
+import axios from "axios";
+
 const MyDetails = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -21,63 +23,91 @@ const MyDetails = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [address1, setAddress1] = useState("");
   const [address2, setAddress2] = useState("");
-  const [zipcode, setZipcode] = useState("");
+  const [zipCode, setZipCode] = useState("");
   const [city, setCity] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [userId, setUserId] = useState("");
 
   /** 사용자 정보 불러오기 */
   useEffect(() => {
-    const userInfo = {
-      name: "김ㅇㅇ",
-      email: "user1@user.com",
-    };
+    const token = localStorage.getItem("token");
 
-    setEmail(userInfo.email);
-    setName(userInfo.name);
-    setAddress1(userInfo.address1 ? userInfo.address1 : "");
-    setAddress2(userInfo.address2 ? userInfo.address2 : "");
-    setZipcode(userInfo.zipcode ? userInfo.zipcode : "");
-    setCity(userInfo.city ? userInfo.city : "");
-    setPhone(userInfo.phone ? userInfo.phone : "");
+    axios
+      .get("http://localhost:8001/api/users/account", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        // setAuthToken(token);
+
+        // Handle success.
+        console.log("Data: ", response.data);
+        console.log("id", response.data._id);
+        setUserId(response.data._id);
+        setEmail(response.data.email);
+        setName(response.data.name);
+        setAddress1(response.data.address1 ? response.data.address1 : address1);
+        setAddress2(response.data.address2 ? response.data.address2 : address2);
+        setZipCode(response.data.zipCode ? response.data.zipCode : zipCode);
+        setCity(response.data.city ? response.data.city : city);
+        setPhoneNumber(
+          response.data.phoneNumber ? response.data.phoneNumber : phoneNumber
+        );
+      })
+      .catch((error) => {
+        // Handle error.
+        console.log("An error occurred:", error.response);
+      });
   }, []);
-
-  /** 비밀번호 확인 */
-  const checkPassword = useCallback(() => {
-    const userPW = {
-      currentPassword: "12341234",
-    };
-
-    if (String(currentPassword) === String(userPW.currentPassword)) {
-      return true;
-    } else {
-      return false;
-    }
-  }, [password, currentPassword]);
 
   /** 사용자 정보 제출 */
   const userDetailSubmit = useCallback(
     (e) => {
       e.preventDefault();
 
-      const userDetail = {
-        name,
-        email,
-        password,
-        currentPassword,
-        address1,
-        address2,
-        zipcode,
-        city,
-        phone,
-      };
+      // const userDetail = {
+      //   name,
+      //   password,
+      //   currentPassword,
+      //   address1,
+      //   address2,
+      //   zipCode,
+      //   city,
+      //   phoneNumber,
+      // };
 
-      if (checkPassword()) {
-        return console.log("디테일 제출", userDetail);
-      } else {
-        return alert("비밀번호를 확인해주세요");
-      }
+      const token = localStorage.getItem("token");
+
+      axios
+        .patch(
+          `http://localhost:8001/api/users/account/${userId}`,
+          {
+            name,
+            password,
+            currentPassword,
+            address1,
+            address2,
+            zipCode,
+            city,
+            phoneNumber,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((response) => {
+          // Handle success.
+          console.log("Data: ", response.data);
+        })
+        .catch((error) => {
+          // Handle error.
+          console.log("An error occurred:", error.response);
+        });
     },
-    [address1, address2, zipcode, city, phone]
+    [address1, address2, zipCode, city, phoneNumber]
   );
 
   return (
@@ -89,7 +119,7 @@ const MyDetails = () => {
         <DetailFormWrapper onSubmit={userDetailSubmit}>
           <InputWrapper>
             <label>이메일</label>
-            <input type="email" required value={email} readOnly />
+            <input type="text" required value={email} readOnly />
           </InputWrapper>
           <InputWrapper>
             <label>이름</label>
@@ -104,7 +134,6 @@ const MyDetails = () => {
             <label>비밀번호 변경</label>
             <input
               type="password"
-              required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="변경할 비밀번호를 입력하세요(8글자 이상)"
@@ -126,7 +155,6 @@ const MyDetails = () => {
             <label>주소</label>
             <input
               type="text"
-              required
               value={address1}
               onChange={(e) => setAddress1(e.target.value)}
               placeholder="주소를 입력하세요"
@@ -136,7 +164,6 @@ const MyDetails = () => {
             <label>상세주소</label>
             <input
               type="text"
-              required
               value={address2}
               onChange={(e) => setAddress2(e.target.value)}
               placeholder="상세 주소를 입력하세요"
@@ -146,9 +173,8 @@ const MyDetails = () => {
             <label>우편번호</label>
             <input
               type="text"
-              required
-              value={zipcode}
-              onChange={(e) => setZipcode(e.target.value)}
+              value={zipCode}
+              onChange={(e) => setZipCode(e.target.value)}
               placeholder="우편번호를 입력하세요"
             />
           </InputWrapper>
@@ -156,7 +182,6 @@ const MyDetails = () => {
             <label>도시</label>
             <input
               type="text"
-              required
               value={city}
               onChange={(e) => setCity(e.target.value)}
               placeholder="도시를 입력하세요"
@@ -166,9 +191,8 @@ const MyDetails = () => {
             <label>전화번호</label>
             <input
               type="tel"
-              required
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
               placeholder="전화번호를 입력하세요"
             />
           </InputWrapper>
