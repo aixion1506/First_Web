@@ -1,6 +1,7 @@
 import React from "react";
-import { OrderedItemListWrapper } from "./orderhistory-styled";
-import OrderedItem from "./OrderedItem";
+import { OrderedItemListWrapper } from "./userorderhistory-styled";
+import UserOrderedItem from "./UserOrderedItem";
+import { Link } from "react-router-dom";
 
 const dummy = [
   {
@@ -78,17 +79,15 @@ const dummy = [
   },
 ];
 
-const OrderedItemList = () => {
+const UserOrderedItemList = () => {
   //   console.log(dummy);
   return (
-    <>
-      <OrderedItemListWrapper>
-        {dummy.map((item) => (
-          <OrderedItem key={item.id} {...item} />
-        ))}
-      </OrderedItemListWrapper>
-    </>
+    <OrderedItemListWrapper>
+      {dummy.map((item) => (
+        <UserOrderedItem key={item.id} {...item} />
+      ))}
+    </OrderedItemListWrapper>
   );
 };
 
-export default OrderedItemList;
+export default UserOrderedItemList;
