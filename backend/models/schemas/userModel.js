@@ -38,4 +38,4 @@ export class UserModel {
 
 const userModel = new UserModel();
 
-export default User;
+export { userModel };
