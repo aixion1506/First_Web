@@ -1,27 +1,32 @@
 import { OrderProduct } from "../models";
 
-export const addOrderProductService = async orderProductInfo => {
-  const createdNewOrderProduct = await OrderProduct.create(orderProductInfo);
+class OrderProductService {
+  constructor(orderProductModel) {
+    this.orderProductModel = orderProductModel;
+  }
 
-  return createdNewOrderProduct;
-};
+  async addOrderProduct(orderProductInfo) {
+    const createdNewOrderProduct = await this.orderProductModel.create(
+      orderProductInfo,
+    );
 
-export const getOrderProductService = async orderId => {
-  const orderProductList = await OrderProduct.find({ orderId });
-  return orderProductList;
-};
+    return createdNewOrderProduct;
+  }
 
-export const setOrderProductService = async (orderProductId, changeInfo) => {
-  const changedOrderProduct = await OrderProduct.updateOne(
-    { orderProductId },
-    { $set: changeInfo },
-  );
+  async getOrderProduct(orderId) {
+    const orderProductList = await this.orderProductModel.find({ orderId });
+    return orderProductList;
+  }
 
-  return changedOrderProduct;
-};
+  async deleteOrderProduct(orderId) {
+    const orderProductDeleted = await this.orderProductModel.deleteMany({
+      orderId,
+    });
 
-export const deleteOrderProductService = async orderProductId => {
-  const orderProductDeleted = await OrderProduct.deleteOne({ orderProductId });
+    return orderProductDeleted;
+  }
+}
 
-  return orderProductDeleted;
-};
+const orderProductService = new OrderProductService(OrderProduct);
+
+export { orderProductService };
