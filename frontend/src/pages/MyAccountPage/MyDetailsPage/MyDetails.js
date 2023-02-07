@@ -38,8 +38,6 @@ const MyDetails = () => {
         },
       })
       .then((response) => {
-        // setAuthToken(token);
-
         // Handle success.
         console.log("Data: ", response.data);
         console.log("id", response.data._id);
@@ -61,47 +59,39 @@ const MyDetails = () => {
   }, []);
 
   /** 사용자 정보 제출 */
-  const userDetailSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
+  const userDetailSubmit = (e) => {
+    e.preventDefault();
 
-      const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
-      axios
-        .patch(
-          `http://localhost:8001/api/users/account/${userId}`,
-          {
-            name,
-            password,
-            currentPassword,
-            address1,
-            address2,
-            zipCode,
-            city,
-            phoneNumber,
+    axios
+      .patch(
+        `http://localhost:8001/api/users/account/${userId}`,
+        {
+          name,
+          password,
+          currentPassword,
+          address1,
+          address2,
+          zipCode,
+          city,
+          phoneNumber,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
           },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
-        .then((response) => {
-          // Handle success.
-          console.log("Data: ", response.data);
-        })
-        .catch((error) => {
-          // Handle error.
-          console.log("An error occurred:", error.response);
-        });
-    },
-    [address1, address2, zipCode, city, phoneNumber]
-  );
-
-  useEffect(() => {
-    const userName = "유저1";
-    setName(userName);
-  }, []);
+        }
+      )
+      .then((response) => {
+        // Handle success.
+        console.log("Data: ", response.data);
+      })
+      .catch((error) => {
+        // Handle error.
+        console.log("An error occurred:", error.response);
+      });
+  };
 
   return (
     <LayoutWrapper>
@@ -148,97 +138,45 @@ const MyDetails = () => {
             <label>주소</label>
             <input
               type="text"
+              required
               value={address1}
               onChange={(e) => setAddress1(e.target.value)}
-              placeholder="주소를 입력하세요"
             />
           </InputWrapper>
           <InputWrapper>
             <label>상세주소</label>
             <input
               type="text"
+              required
               value={address2}
               onChange={(e) => setAddress2(e.target.value)}
-              placeholder="상세 주소를 입력하세요"
             />
           </InputWrapper>
           <InputWrapper>
             <label>우편번호</label>
             <input
               type="text"
+              required
               value={zipCode}
               onChange={(e) => setZipCode(e.target.value)}
-              placeholder="우편번호를 입력하세요"
             />
           </InputWrapper>
           <InputWrapper>
             <label>도시</label>
             <input
               type="text"
+              required
               value={city}
               onChange={(e) => setCity(e.target.value)}
-              placeholder="도시를 입력하세요"
             />
           </InputWrapper>
           <InputWrapper>
             <label>전화번호</label>
             <input
               type="tel"
+              required
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
-              placeholder="전화번호를 입력하세요"
-            />
-            <label>이름</label>
-            <input
-              type="text"
-              required
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </InputWrapper>
-          <InputWrapper>
-            <label>주소</label>
-            <input
-              type="text"
-              required
-              value={address1}
-              onChange={(e) => setAddress1(e.target.value)}
-            />
-          </InputWrapper>
-          <InputWrapper>
-            <label>상세주소</label>
-            <input
-              type="text"
-              required
-              value={address2}
-              onChange={(e) => setAddress2(e.target.value)}
-            />
-          </InputWrapper>
-          <InputWrapper>
-            <label>우편번호</label>
-            <input
-              type="text"
-              required
-              value={zipcode}
-              onChange={(e) => setZipcode(e.target.value)}
-            />
-          </InputWrapper>
-          <InputWrapper>
-            <label>도시</label>
-            <input
-              type="text"
-              required
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-            />
-          </InputWrapper>
-          <InputWrapper>
-            <label>전화번호</label>
-            <input
-              type="tel"
-              required
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
             />
           </InputWrapper>
           <Button>APPLY</Button>

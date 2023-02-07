@@ -12,6 +12,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const passwordRef = useRef();
+  const navigate = useNavigate();
 
   const login = () => {
     axios

@@ -10,22 +10,9 @@ import axios from "axios";
 
 const MyAccount = () => {
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    axios
-      .get("http://localhost:8001/api/users/account", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        // Handle success.
-        setUserId(response.data._id);
-        console.log("Data: ", response.data);
-      })
-      .catch((error) => {
-        // Handle error.
-        console.log("An error occurred:", error.response);
-      });
+    if (!localStorage.getItem("token")) {
+      console.log("logged out");
+    }
   });
 
   return (

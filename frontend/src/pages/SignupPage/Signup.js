@@ -54,23 +54,6 @@ const Signup = () => {
     [email]
   );
 
-  /** 회원가입 */
-  const register = async () => {
-    await axios
-      .post("http://localhost:8001/api/users/register", {
-        name,
-        email,
-        password,
-      })
-      .then((res) => {
-        console.log("jwt", res.data.token);
-        localStorage.setItem("token", res.data.token);
-      })
-      .catch((err) => {
-        console.log("Error", err);
-      });
-  };
-
   /** 비밀번호 유효성 검사 */
   useEffect(() => {
     if (password && passwordConfirm) {
@@ -78,14 +61,36 @@ const Signup = () => {
     }
   }, [password, passwordConfirm]);
 
+  /** 회원가입 */
+  const register = () => {
+    axios
+      .post("http://localhost:8001/api/users/register", {
+        name,
+        email,
+        password,
+      })
+      .then((res) => {
+        console.log("jwt", res.data);
+        // localStorage.setItem("token", res.data.token);
+      })
+      .catch((err) => {
+        console.log("Error", err);
+      });
+  };
+
   /** 회원가입 제출 */
   const signupSubmit = useCallback(
     (e) => {
       e.preventDefault();
 
-      if (isNameValid && isEmailValid && isPwMatch) {
-        // register();
+      if (!isNameValid) {
+        return nameRef.current.focus();
+      }
+      if (!isEmailValid) {
+        return emailRef.current.focus();
+      }
 
+      if (isNameValid && isEmailValid && isPwMatch) {
         console.log(
           "회원가입 완료",
           name,
@@ -94,13 +99,7 @@ const Signup = () => {
           passwordConfirm,
           isPwMatch
         );
-      }
-
-      if (!isNameValid) {
-        return nameRef.current.focus();
-      }
-      if (!isEmailValid) {
-        return emailRef.current.focus();
+        return register();
       }
     },
     [name, email, password, passwordConfirm]
@@ -109,7 +108,7 @@ const Signup = () => {
   return (
     <SingupWrapper>
       <h1>SIGN UP</h1>
-      <button onClick={register}>test button</button>
+      {/* <button onClick={register}>test button</button> */}
       <SignupForm onSubmit={signupSubmit}>
         <InputWrapper>
           <label>NAME</label>

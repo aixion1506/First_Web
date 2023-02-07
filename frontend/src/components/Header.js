@@ -23,8 +23,11 @@ const Header = () => {
   }, []);
 
   const logoutSubmit = () => {
-    localStorage.removeItem("token");
-    setIsLoggedIn(false);
+    if (confirm("로그아웃 하시겠습니까?")) {
+      localStorage.removeItem("token");
+      console.log("로그아웃 완료");
+      setIsLoggedIn(false);
+    }
   };
 
   return (
