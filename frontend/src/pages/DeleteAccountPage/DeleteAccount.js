@@ -23,6 +23,9 @@ const DeleteAccount = () => {
       alert("회원탈퇴가 완료되었습니다.");
       console.log("비밀번호", password);
     }
+
+    alert("회원탈퇴");
+    console.log("비밀번호", password);
   };
 
   return (

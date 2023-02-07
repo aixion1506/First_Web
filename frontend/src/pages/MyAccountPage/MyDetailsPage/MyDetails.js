@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ROUTE } from "../../../routes/route";
+import axios from "axios";
 import {
   MyDetailsWrapper,
   DetailFormWrapper,
@@ -13,8 +14,6 @@ import {
   InputWrapper,
   Button,
 } from "../../../components/common-styled";
-
-import axios from "axios";
 
 const MyDetails = () => {
   const [name, setName] = useState("");
@@ -66,17 +65,6 @@ const MyDetails = () => {
     (e) => {
       e.preventDefault();
 
-      // const userDetail = {
-      //   name,
-      //   password,
-      //   currentPassword,
-      //   address1,
-      //   address2,
-      //   zipCode,
-      //   city,
-      //   phoneNumber,
-      // };
-
       const token = localStorage.getItem("token");
 
       axios
@@ -109,6 +97,11 @@ const MyDetails = () => {
     },
     [address1, address2, zipCode, city, phoneNumber]
   );
+
+  useEffect(() => {
+    const userName = "유저1";
+    setName(userName);
+  }, []);
 
   return (
     <LayoutWrapper>
@@ -194,6 +187,58 @@ const MyDetails = () => {
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
               placeholder="전화번호를 입력하세요"
+            />
+            <label>이름</label>
+            <input
+              type="text"
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <label>주소</label>
+            <input
+              type="text"
+              required
+              value={address1}
+              onChange={(e) => setAddress1(e.target.value)}
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <label>상세주소</label>
+            <input
+              type="text"
+              required
+              value={address2}
+              onChange={(e) => setAddress2(e.target.value)}
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <label>우편번호</label>
+            <input
+              type="text"
+              required
+              value={zipcode}
+              onChange={(e) => setZipcode(e.target.value)}
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <label>도시</label>
+            <input
+              type="text"
+              required
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <label>전화번호</label>
+            <input
+              type="tel"
+              required
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
             />
           </InputWrapper>
           <Button>APPLY</Button>

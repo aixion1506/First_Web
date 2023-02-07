@@ -72,18 +72,18 @@ export const ROUTE = {
     element: CategoryManage,
   },
   MyAccount: {
-    path: `/myaccount`,
-    link: `/myaccount`,
+    path: "/myaccount",
+    link: "/myaccount",
     element: MyAccount,
   },
   MyDetails: {
-    path: `/myaccount/mydetails`,
-    link: `/myaccount/mydetails`,
+    path: "/myaccount/mydetails",
+    link: "/myaccount/mydetails",
     element: MyDetails,
   },
   OrderHistory: {
-    path: `/myaccount/orderhistory`,
-    link: `/myaccount/orderhistory`,
+    path: "/myaccount/orderhistory",
+    link: "/myaccount/orderhistory",
     element: OrderHistory,
   },
   Productlist: {
