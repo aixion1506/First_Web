@@ -3,13 +3,14 @@ import productRouter from "./productRouter";
 import categoryRouter from "./categoryRouter";
 import orderRouter from "./orderRouter";
 import orderProductRouter from "./orderProductRouter";
-export * from "./auth";
+import userRouter from "./userRouter";
+import adminRouter from "./adminRouter";
 
-const indexRouter = express.Router();
-
-/* GET home page. */
-indexRouter.get("/", (req, res) => {
-  res.render("index", { title: "Express" });
-});
-
-export { indexRouter, productRouter, categoryRouter, orderRouter, orderProductRouter  };
+export {
+  adminRouter,
+  userRouter,
+  productRouter,
+  categoryRouter,
+  orderRouter,
+  orderProductRouter,
+};

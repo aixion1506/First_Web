@@ -1,10 +1,10 @@
 import { Schema } from "mongoose";
 
-
 const ProductSchema = new Schema({
   title: {
     type: String,
     required: true,
+    trim: true,
   },
   categoryId: {
     type: Schema.Types.ObjectId,
@@ -14,18 +14,22 @@ const ProductSchema = new Schema({
   manufacturer: {
     type: String,
     required: true,
+    trim: true,
   },
   shortDescription: {
     type: String,
     required: true,
+    trim: true,
   },
   detailDescription: {
     type: String,
     required: true,
+    trim: true,
   },
-  imageKey: {
+  imageUrl: {
     type: String,
     required: true,
+    trim: true,
   },
   inventory: {
     type: Number,
@@ -36,7 +40,6 @@ const ProductSchema = new Schema({
   price: {
     type: Number,
     required: true,
-    default: 10000,
     min: 0,
   },
   searchKeywords: {
@@ -44,6 +47,5 @@ const ProductSchema = new Schema({
     required: true,
   },
 });
-
 
 export default ProductSchema;
