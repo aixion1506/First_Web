@@ -36,4 +36,4 @@ const UserSchema = new Schema({
   },
 });
 
-export { UserSchema };
+export default UserSchema;

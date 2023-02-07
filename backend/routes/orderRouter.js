@@ -1,18 +1,12 @@
 import express from "express";
-import {
-  addOrder,
-  getOrderAdmin,
-  getOrderUser,
-  setOrder,
-  deleteOrder,
-} from "../controllers/orderController";
+import { orderController } from "../controllers/orderController";
 
 const orderRouter = express.Router();
 
-orderRouter.post("/add", addOrder);
-orderRouter.get("/orderlist/admin", getOrderAdmin);
-orderRouter.get("/orderlist/user", getOrderUser);
-orderRouter.patch("/orderlist/change", setOrder);
-orderRouter.delete("/delete", deleteOrder);
+orderRouter.post("/order", orderController.addOrder);
+orderRouter.get("/order", orderController.getOrderAdmin);
+orderRouter.get("/order/user", orderController.getOrderUser);
+orderRouter.patch("/order/:orderNumber", orderController.setOrder);
+orderRouter.delete("/order/:orderNumber", orderController.deleteOrder);
 
 export default orderRouter;

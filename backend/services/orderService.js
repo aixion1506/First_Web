@@ -1,29 +1,41 @@
 import { Order } from "../models";
 
-export const addOrderService = async orderInfo => {
-  const createdNewOrder = await Order.create(orderInfo);
+class OrderService {
+  constructor(orderModel) {
+    this.orderModel = orderModel;
+  }
+  async addOrder(orderInfo) {
+    const createdNewOrder = await this.orderModel.create(orderInfo);
 
-  return createdNewOrder;
-};
+    return createdNewOrder;
+  }
 
-export const getOrderAdminService = async () => {
-  const orderList = await Order.find();
-  return orderList;
-};
+  async getOrderAdmin() {
+    const orderList = await this.orderModel.find();
+    return orderList;
+  }
 
-export const getOrderUserService = async userId => {
-  const orderList = await Order.find({ userId });
-  return orderList;
-};
+  async getOrderUser(userId) {
+    const orderList = await this.orderModel.find({ userId });
+    return orderList;
+  }
 
-export const setOrderService = async (orderId, changeInfo) => {
-  const changedOrder = await Order.updateOne({ orderId }, { $set: changeInfo });
+  async setOrder(orderNumber, changeInfo) {
+    const changedOrder = await this.orderModel.updateOne(
+      { orderNumber },
+      { $set: changeInfo },
+    );
 
-  return changedOrder;
-};
+    return changedOrder;
+  }
 
-export const deleteOrderService = async orderId => {
-  const orderDeleted = await Order.deleteOne({ orderId });
+  async deleteOrder(orderNumber) {
+    const orderDeleted = await this.orderModel.deleteOne({ orderNumber });
 
-  return orderDeleted;
-};
+    return orderDeleted;
+  }
+}
+
+const orderService = new OrderService(Order);
+
+export { orderService };
