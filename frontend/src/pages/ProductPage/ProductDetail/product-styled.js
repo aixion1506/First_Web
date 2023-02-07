@@ -41,11 +41,12 @@ export const ProductInfo = styled.div `
   flex-direction: column;
   flex-basis: 40%;
   padding: 0 3%;
-  div {
+  > div {
     width: 100%;
   }
 
-  div:first-child {
+  > div:first-child {
+    margin-bottom: 10px;
     p {
       font-size: 30px;
     }
@@ -66,18 +67,18 @@ export const ProductInfo = styled.div `
       cursor: pointer;
       transition: all 0.3s;
     }
-    button:nth-child(2) {
+    button:nth-child(3) {
       background-color: #000;
       color: #fff;
     }
-    button:nth-child(3) {
+    button:nth-child(4) {
       background-color: #fff;
       border: 2px solid #d9d9d9;
     }
-    button:nth-child(2):hover {
+    button:nth-child(3):hover {
       opacity: 0.7;
     }
-    button:nth-child(3):hover {
+    button:nth-child(4):hover {
       background-color: #d9d9d9;
     }
   }
