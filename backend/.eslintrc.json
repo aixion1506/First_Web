@@ -7,6 +7,8 @@
   // "extends": ["airbnb-base", "prettier", "plugin:node/recommended"],
   "extends": ["airbnb-base", "plugin:node/recommended", "prettier"],
   // "extends": [],
+  "import/prefer-default-export": "off",
+  "import/no-extraneous-dependencies": "off",
 
   "globals": {
     "Atomics": "readonly",
