@@ -1,10 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { ROUTE } from "../../../routes/route";
+import axios from "axios";
 import {
   MyDetailsWrapper,
   DetailFormWrapper,
   TitleWrapper,
   GotoSignout,
+  CancelButton,
 } from "./mydetails-styled";
 import {
   LayoutWrapper,
@@ -12,41 +15,83 @@ import {
   Button,
 } from "../../../components/common-styled";
 
-/** 이름 변경 가능하게 해야하나? 아님 readOnly로 해야하나???
- * 변경 가능하면 유효성체크 해야하나,,,?
- * 전화번호 숫자로 유효성체크 해야하나...???
- */
-
 const MyDetails = () => {
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [currentPassword, setCurrentPassword] = useState("");
   const [address1, setAddress1] = useState("");
   const [address2, setAddress2] = useState("");
-  const [zipcode, setZipcode] = useState("");
+  const [zipCode, setZipCode] = useState("");
   const [city, setCity] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [userId, setUserId] = useState("");
 
-  const userDetailSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
-
-      const userDetail = {
-        name,
-        address1,
-        address2,
-        zipcode,
-        city,
-        phone,
-      };
-
-      console.log("디테일 제출", userDetail);
-    },
-    [address1, address2, zipcode, city, phone]
-  );
-
+  /** 사용자 정보 불러오기 */
   useEffect(() => {
-    const userName = "유저1";
-    setName(userName);
+    const token = localStorage.getItem("token");
+
+    axios
+      .get("http://localhost:8001/api/users/account", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        // Handle success.
+        console.log("Data: ", response.data);
+        console.log("id", response.data._id);
+        setUserId(response.data._id);
+        setEmail(response.data.email);
+        setName(response.data.name);
+        setAddress1(response.data.address1 ? response.data.address1 : address1);
+        setAddress2(response.data.address2 ? response.data.address2 : address2);
+        setZipCode(response.data.zipCode ? response.data.zipCode : zipCode);
+        setCity(response.data.city ? response.data.city : city);
+        setPhoneNumber(
+          response.data.phoneNumber ? response.data.phoneNumber : phoneNumber
+        );
+      })
+      .catch((error) => {
+        // Handle error.
+        console.log("An error occurred:", error.response);
+      });
   }, []);
+
+  /** 사용자 정보 제출 */
+  const userDetailSubmit = (e) => {
+    e.preventDefault();
+
+    const token = localStorage.getItem("token");
+
+    axios
+      .patch(
+        `http://localhost:8001/api/users/account/${userId}`,
+        {
+          name,
+          password,
+          currentPassword,
+          address1,
+          address2,
+          zipCode,
+          city,
+          phoneNumber,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        // Handle success.
+        console.log("Data: ", response.data);
+      })
+      .catch((error) => {
+        // Handle error.
+        console.log("An error occurred:", error.response);
+      });
+  };
 
   return (
     <LayoutWrapper>
@@ -56,12 +101,37 @@ const MyDetails = () => {
         </TitleWrapper>
         <DetailFormWrapper onSubmit={userDetailSubmit}>
           <InputWrapper>
+            <label>이메일</label>
+            <input type="text" required value={email} readOnly />
+          </InputWrapper>
+          <InputWrapper>
             <label>이름</label>
             <input
               type="text"
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <label>비밀번호 변경</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="변경할 비밀번호를 입력하세요(8글자 이상)"
+              minLength="8"
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <label>현재 비밀번호</label>
+            <input
+              type="password"
+              required
+              value={currentPassword}
+              onChange={(e) => setCurrentPassword(e.target.value)}
+              placeholder="현재 비밀번호를 입력하세요"
+              minLength="8"
             />
           </InputWrapper>
           <InputWrapper>
@@ -87,8 +157,8 @@ const MyDetails = () => {
             <input
               type="text"
               required
-              value={zipcode}
-              onChange={(e) => setZipcode(e.target.value)}
+              value={zipCode}
+              onChange={(e) => setZipCode(e.target.value)}
             />
           </InputWrapper>
           <InputWrapper>
@@ -105,13 +175,16 @@ const MyDetails = () => {
             <input
               type="tel"
               required
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
             />
           </InputWrapper>
           <Button>APPLY</Button>
+          <CancelButton>
+            <Link to="../">CANCEL</Link>
+          </CancelButton>
           <GotoSignout>
-            <Link to="/">DELETE ACCOUNT</Link>
+            <Link to={ROUTE.DELETEACCOUNT.link}>DELETE ACCOUNT</Link>
           </GotoSignout>
         </DetailFormWrapper>
       </MyDetailsWrapper>

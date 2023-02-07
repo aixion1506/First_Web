@@ -17,6 +17,13 @@ const DeleteAccount = () => {
   const deleteAccountSubmit = (e) => {
     e.preventDefault();
 
+    if (
+      confirm("정말 회원탈퇴를 하시겠습니까? 탈퇴 후 계정 복구는 불가능합니다.")
+    ) {
+      alert("회원탈퇴가 완료되었습니다.");
+      console.log("비밀번호", password);
+    }
+
     alert("회원탈퇴");
     console.log("비밀번호", password);
   };

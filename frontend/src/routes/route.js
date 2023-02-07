@@ -31,7 +31,7 @@ export const ROUTE = {
     link: "/signup",
     element: Signup,
   },
-  SIGNOUT: {
+  DELETEACCOUNT: {
     path: "/deleteaccount",
     link: "/deleteaccount",
     element: DeleteAccount,
@@ -62,8 +62,8 @@ export const ROUTE = {
     element: Product,
   },
   PRODUCTDETAIL: {
-    path: "/product/detail",
-    link: "/product/detail",
+    path: "/productDetail",
+    link: "/productDetail",
     element: ProductDetail,
   },
   CategoryManage: {
