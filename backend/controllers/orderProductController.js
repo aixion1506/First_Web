@@ -1,4 +1,4 @@
-import orderProductService from "../services/orderProductService";
+import { orderProductService } from "../services/orderProductService";
 
 class OrderProductController {
   async addOrderProduct(req, res, next) {
@@ -42,4 +42,4 @@ class OrderProductController {
 
 const orderProductController = new OrderProductController();
 
-export default orderProductController;
+export { orderProductController };

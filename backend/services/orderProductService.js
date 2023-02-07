@@ -29,4 +29,4 @@ class OrderProductService {
 
 const orderProductService = new OrderProductService(OrderProduct);
 
-export default orderProductService;
+export { orderProductService };
