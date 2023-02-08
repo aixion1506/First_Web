@@ -53,8 +53,8 @@ export const ROUTE = {
     element: Productedit,
   },
   ORDER: {
-    path: "/order",
-    link: "/order",
+    path: "/order/:id",
+    link: "/order/:id",
     element: Order,
   },
   PRODUCT: {
