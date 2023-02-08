@@ -5,8 +5,8 @@ const orderRouter = express.Router();
 
 orderRouter.post("/order", orderController.addOrder);
 orderRouter.get("/order", orderController.getOrderAdmin);
-orderRouter.get("/order/user", orderController.getOrderUser);
-orderRouter.patch("/order/:orderNumber", orderController.setOrder);
-orderRouter.delete("/order/:orderNumber", orderController.deleteOrder);
+orderRouter.get("/order/:userId", orderController.getOrderUser);
+orderRouter.patch("/order/:orderId", orderController.setOrder);
+orderRouter.delete("/order/:orderId", orderController.deleteOrder);
 
 export default orderRouter;
