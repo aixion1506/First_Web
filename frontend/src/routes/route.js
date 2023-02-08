@@ -33,8 +33,8 @@ export const ROUTE = {
     element: Signup,
   },
   DELETEACCOUNT: {
-    path: "/deleteaccount",
-    link: "/deleteaccount",
+    path: "/account/delete",
+    link: "/account/delete",
     element: DeleteAccount,
   },
   CART: {
@@ -43,8 +43,8 @@ export const ROUTE = {
     element: Cart,
   },
   PRODUCTADD: {
-    path: "/productadd",
-    link: "/productadd",
+    path: "/product/add",
+    link: "/product/add",
     element: Productadd,
   },
   PRODUCTEDIT: {
@@ -63,38 +63,38 @@ export const ROUTE = {
     element: Product,
   },
   PRODUCTDETAIL: {
-    path: "/productDetail",
-    link: "/productDetail",
+    path: "/product/detail",
+    link: "/product/detail",
     element: ProductDetail,
   },
   CATEGORYMANAGE: {
-    path: "/categorymanage",
-    link: "/categorymanage",
+    path: "/admin/category/manage",
+    link: "/admin/category/manage",
     element: CategoryManage,
   },
   MYACCOUNT: {
-    path: "/myaccount",
-    link: "/myaccount",
+    path: "/account",
+    link: "/account",
     element: MyAccount,
   },
   MYDETIALS: {
-    path: "/myaccount/mydetails",
-    link: "/myaccount/mydetails",
+    path: "/account/detail",
+    link: "/account/detail",
     element: MyDetails,
   },
   USERORDERHISTORY: {
-    path: "/myaccount/orderhistory",
-    link: "/myaccount/orderhistory",
+    path: "/account/order",
+    link: "/account/order",
     element: USERORDERHISTORY,
   },
   USERORDEREDDETAIL: {
-    path: "/myaccount/orderhistory/detail/:id",
-    link: "/myaccount/orderhistory/detail/",
+    path: "/myaccount/order/detail/:id",
+    link: "/myaccount/order/detail/",
     element: UserOrderedDetail,
   },
   PRODUCTLIST: {
-    path: "/productlist",
-    link: "/productlist",
+    path: "/product/list",
+    link: "/product/list",
     element: Productlist,
   },
   ADMIN: {

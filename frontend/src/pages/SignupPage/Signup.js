@@ -74,8 +74,8 @@ const Signup = () => {
       });
       navigate("/");
     } catch (err) {
-      console.log("Error", err);
-      return alert("이미 사용중인 이메일입니다.");
+      console.log("Error", err?.response?.data);
+      // return alert("이미 사용중인 이메일입니다.");
     }
   };
 
