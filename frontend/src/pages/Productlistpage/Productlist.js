@@ -48,6 +48,7 @@ const Productlist = () => {
   //     return alert("상품이 삭제되었습니다.");
   //   }
   // };
+  //
 
   return (
     <LayoutWrapper>
