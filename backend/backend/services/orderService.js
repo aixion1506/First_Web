@@ -5,13 +5,8 @@ class OrderService {
     this.orderModel = orderModel;
   }
   async addOrder(orderInfo) {
-    const checkOverlap = await this.orderModel.findOne({
-      orderNumber: orderInfo.orderNumber,
-    });
-    if (checkOverlap) {
-      throw new Error("주문 번호가 중복되었습니다.");
-    }
     const createdNewOrder = await this.orderModel.create(orderInfo);
+
     return createdNewOrder;
   }
 
@@ -25,27 +20,19 @@ class OrderService {
     return orderList;
   }
 
-  async setOrder(orderId, changeInfo) {
-    const order = await this.orderModel.findOne({ _id: orderId });
-    if (!order) {
-      throw new Error("주문이 존재하지 않습니다.");
-    }
-
+  async setOrder(orderNumber, changeInfo) {
     const changedOrder = await this.orderModel.updateOne(
-      { _id: orderId },
+      { orderNumber },
       { $set: changeInfo },
     );
+
     return changedOrder;
   }
 
-  async deleteOrder(orderId) {
-    const { deletedCount } = await this.orderModel.deleteOne({ _id: orderId });
+  async deleteOrder(orderNumber) {
+    const orderDeleted = await this.orderModel.deleteOne({ orderNumber });
 
-    if (deletedCount === 0) {
-      throw new Error("주문 삭제에 실패했습니다.");
-    }
-
-    return { result: "주문 삭제 완료" };
+    return orderDeleted;
   }
 }
 
