@@ -9,7 +9,7 @@ class ProductService {
 
   // 상품 추가
   async addProduct(productInfo) {
-    const { title, categoryId } = productInfo;
+    const { title } = productInfo;
 
     // 상품 중복 확인
     const founded = await this.productModel.findOne({ title });
@@ -17,24 +17,19 @@ class ProductService {
       throw new Error(`${title} 상품이 존재합니다.`);
     }
 
-    const category = await this.categoryModel.findOne({
-      title: categoryId,
-    });
-    productInfo.categoryId = category.id;
-
     // DB 저장
     const createdNewProduct = await this.productModel.create(productInfo);
     return createdNewProduct;
   }
 
   // 상품 수정
-  async setProduct(title, toUpdateInfo) {
-    const product = await this.productModel.findOne({ title });
+  async setProduct(id, toUpdateInfo) {
+    const product = await this.productModel.findOne({ _id: id });
     if (!product) {
-      throw new Error(`${title} 상품이 존재하지 않습니다.`);
+      throw new Error(`해당 상품이 존재하지 않습니다.`);
     }
 
-    if (toUpdateInfo.title !== title) {
+    if (toUpdateInfo.title !== product.title) {
       const founded = await this.productModel.findOne({
         title: toUpdateInfo.title,
       });
@@ -47,7 +42,7 @@ class ProductService {
     }
 
     const updated = await this.productModel.updateOne(
-      { title },
+      { _id: id },
       { $set: toUpdateInfo },
     );
 
@@ -60,15 +55,15 @@ class ProductService {
   }
 
   // 상품 삭제
-  async deleteProduct(title) {
-    const product = await this.productModel.findOne({ title });
+  async deleteProduct(id) {
+    const product = await this.productModel.findOne({ _id: id });
     if (!product) {
-      throw new Error(`${title} 상품이 존재하지 않습니다.`);
+      throw new Error(`해당 상품이 존재하지 않습니다.`);
     }
 
-    const { deletedCount } = await this.productModel.deleteOne({
-      _id: product.id,
-    });
+    const { title } = product;
+
+    const { deletedCount } = await this.productModel.deleteOne({ _id: id });
     if (deletedCount === 0) {
       throw new Error(`${title} 상품 삭제에 실패했습니다.`);
     }
@@ -83,22 +78,22 @@ class ProductService {
   }
 
   // 상품 카테고리별 조회
-  async getProductsByCategory(title) {
-    const category = await this.categoryModel.findOne({ title });
+  async getProductsByCategory(id) {
+    const category = await this.categoryModel.findOne({ _id: id });
     // 카테고리가 없다면
     if (!category) {
-      throw new Error(`${title} 카테고리가 존재하지 않습니다.`);
+      throw new Error(`해당 카테고리가 존재하지 않습니다.`);
     }
-    const products = await this.productModel.find({ categoryId: category.id });
+    const products = await this.productModel.find({ categoryId: id });
     return products;
   }
 
   // 특정 상품 조회
-  async getProduct(title) {
-    const product = await this.productModel.findOne({ title });
+  async getProduct(id) {
+    const product = await this.productModel.findOne({ _id: id });
     // 상품이 없다면
     if (!product) {
-      throw new Error(`${title} 상품이 존재하지 않습니다.`);
+      throw new Error(`해당 상품이 존재하지 않습니다.`);
     }
     return product;
   }
