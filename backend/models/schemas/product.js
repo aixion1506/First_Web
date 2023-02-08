@@ -42,10 +42,10 @@ const ProductSchema = new Schema({
     required: true,
     min: 0,
   },
-  searchKeywords: {
-    type: [String],
-    required: true,
-  },
+  // searchKeywords: {
+  //   type: [String],
+  //   required: true,
+  // },
 });
 
 export default ProductSchema;

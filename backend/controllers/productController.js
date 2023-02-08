@@ -69,7 +69,7 @@ class ProductController {
         imageUrl,
         inventory,
         price,
-        searchKeywords,
+        // searchKeywords,
       } = req.body;
 
       const result = await productService.setProduct(productId, {
@@ -81,7 +81,7 @@ class ProductController {
         imageUrl,
         inventory,
         price,
-        searchKeywords,
+        // searchKeywords,
       });
 
       res.status(200).json(result);
