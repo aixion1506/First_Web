@@ -40,6 +40,10 @@ const Productlist = () => {
     const testList = response.data;
     setProuctList(testList);
     console.log(testList);
+    // const productdelete = await axios.delete(
+    //   `http://localhost:8001/api/products`
+    // );
+
     // setProuctList([...productList, { name, inventory, status, price }]);
   };
   // const DeleteButton = () => {
