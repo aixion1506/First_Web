@@ -1,6 +1,7 @@
 import React from "react";
 
 const CartItem = (item) => {
+  console.log(item)
   return (
     <li>
       <input type="checkbox" id="" />
@@ -12,10 +13,10 @@ const CartItem = (item) => {
         <p>{item._id}</p>
         <p>{item.title}</p>
         <p>₩{item.price}</p>
-        <p>{item.quantity}</p>
+
         <div>
           <button>-</button>
-          <span>count</span>
+          <span>{item.quantity}</span>
           <button>+</button>
         </div>
       </div>

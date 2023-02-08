@@ -6,6 +6,7 @@ import Nav from "./components/Nav";
 import { ROUTE_ARR } from "./routes/route";
 
 function App() {
+  const [cart, setCart] = useState([])
 
 
 
@@ -18,7 +19,8 @@ function App() {
       <Routes>
         {ROUTE_ARR.map((route, index) => {
           return (
-            <Route path={route.path} element={<route.element />} key={index} />
+            <Route path={route.path} element={<route.element cart={cart} setCart={setCart} />} key={index} />
+            // <Route path={route.path} element={<route.element />} key={index} />
           );
         })}
       </Routes>

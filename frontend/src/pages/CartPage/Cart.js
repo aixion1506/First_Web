@@ -6,9 +6,10 @@ const Cart = ({ cart, setCart }) => {
 
   useEffect(() => {
     setCarts(JSON.parse(localStorage.getItem("cart")));
-    console.log(cart)
+    console.log(carts)
   }, [])
 
+  console.log(cart)
 
   return (
     <>

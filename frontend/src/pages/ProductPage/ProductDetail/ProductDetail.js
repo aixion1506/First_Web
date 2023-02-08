@@ -5,9 +5,9 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 
-const Product = () => {
+const Product = ({ cart, setCart }) => {
   const { id } = useParams();
-  const [cart, setCart] = useState([])
+
   const [product, setProduct] = useState({})
   const [count, setCount] = useState(1);
   useEffect(() => {
