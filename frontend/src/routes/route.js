@@ -58,8 +58,8 @@ export const ROUTE = {
     element: Order,
   },
   PRODUCT: {
-    path: "/product",
-    link: "/product",
+    path: "/product/:category",
+    link: "/product/:category",
     element: Product,
   },
   PRODUCTDETAIL: {
@@ -68,8 +68,8 @@ export const ROUTE = {
     element: ProductDetail,
   },
   CategoryManage: {
-    path: "/categorymanage",
-    link: "/categorymanage",
+    path: "/admin/categorymanage",
+    link: "/admin/categorymanage",
     element: CategoryManage,
   },
   MyAccount: {

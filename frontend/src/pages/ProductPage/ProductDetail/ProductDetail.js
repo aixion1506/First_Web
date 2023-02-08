@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { useParams } from 'react-router-dom';
 import {
   ProductDetailWrapper,
-  ProductInfo,
   ProductImg,
-} from "./product-styled";
+  ProductInfo, Button,
+} from "./productDetail-styled";
 import RadioBox from "./RadioBox";
-import { useParams } from "react-router-dom";
-import { useEffect } from "react";
-import axios from "axios";
 
 const Product = ({ cart, setCart }) => {
   const { id } = useParams();
@@ -80,10 +79,7 @@ const Product = ({ cart, setCart }) => {
     localStorage.setItem("cart", JSON.stringify(cart))
     console.log(cart)
   }
-
-
-
-
+  
   const size = { type: "size", option: ["small", "medium", "large", "xlarge", "xxlarge"] };
 
   return (
