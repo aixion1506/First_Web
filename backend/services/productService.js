@@ -1,4 +1,3 @@
-import { renderFile } from "pug";
 import { Product, Category } from "../models";
 
 class ProductService {
@@ -73,7 +72,7 @@ class ProductService {
 
   // 상품 전체 조회
   async getProducts() {
-    const products = await this.productModel.find({});
+    const products = await this.productModel.find({}).populate("categoryId");
     return products;
   }
 
@@ -84,13 +83,17 @@ class ProductService {
     if (!category) {
       throw new Error(`해당 카테고리가 존재하지 않습니다.`);
     }
-    const products = await this.productModel.find({ categoryId: id });
+    const products = await this.productModel
+      .find({ categoryId: id })
+      .populate("categoryId");
     return products;
   }
 
   // 특정 상품 조회
   async getProduct(id) {
-    const product = await this.productModel.findOne({ _id: id });
+    const product = await this.productModel
+      .findOne({ _id: id })
+      .populate("categoryId");
     // 상품이 없다면
     if (!product) {
       throw new Error(`해당 상품이 존재하지 않습니다.`);
