@@ -44,8 +44,8 @@ const MyDetails = () => {
       })
       .then((response) => {
         // Handle success.
-        console.log("Data: ", response.data);
-        console.log("id", response.data._id);
+        console.log("User Data: ", response.data);
+        console.log("user id", response.data._id);
 
         /** 유저 정보 값 불러오기 */
         setEmail(response.data.email);

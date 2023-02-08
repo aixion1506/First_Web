@@ -34,4 +34,16 @@ export const InfoTitle = styled.div`
   }
 `;
 
-export const InfoDetail = styled.div``;
+export const InfoDetail = styled.div`
+  ul {
+    margin-top: 20px;
+  }
+  li {
+    margin-top: 14px;
+  }
+  strong {
+    display: inline-block;
+    width: 80px;
+    font-weight: bold;
+  }
+`;

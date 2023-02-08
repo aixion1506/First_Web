@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
 import { LayoutWrapper } from "../../../../components/common-styled";
 import { TitleWrapper } from "../userorderhistory-styled";
 import {
@@ -119,14 +121,44 @@ const dummy = [
 const UserOrderedDetail = () => {
   const { id } = useParams();
   const [item, setItem] = useState({});
+  const [products, setProducts] = useState([]);
+  const [orderItem, setOrderItem] = useState([]);
+
+  const location = useLocation();
+
+  const getProducts = async () => {
+    const orderId = "63e2a4239e40b325a36b3138";
+    try {
+      const response = await axios.get("http://localhost:8001/api/products/");
+      const products = response.data;
+
+      console.log("response1", products);
+
+      const response2 = await axios.get(
+        `http://localhost:8001/api/order/product/${orderId}`
+      );
+      const orderItemInfo = response2.data;
+
+      console.log("response2", orderItemInfo);
+    } catch (err) {
+      console.log("Error", err);
+    }
+  };
 
   useEffect(() => {
+    console.log("state", location.state);
+  }, []);
+
+  useEffect(() => {
+    getProducts();
     if (id) {
-      const matchedItem = dummy.find((item) => item.id == id);
-      setItem(matchedItem);
+      console.log("products", products);
+      console.log("id", id);
+      // const matchedItem = products?.find((item) => item._id == id);
+      setItem(products?.find((item) => item._id == id));
     }
     if (item) {
-      console.log(item);
+      console.log("item", item);
     }
   }, [id, item]);
 

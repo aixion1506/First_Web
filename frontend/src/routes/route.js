@@ -89,7 +89,7 @@ export const ROUTE = {
   },
   USERORDEREDDETAIL: {
     path: "/myaccount/orderhistory/detail/:id",
-    link: "/myaccount/orderhistory/detail/:id",
+    link: "/myaccount/orderhistory/detail/",
     element: UserOrderedDetail,
   },
   PRODUCTLIST: {

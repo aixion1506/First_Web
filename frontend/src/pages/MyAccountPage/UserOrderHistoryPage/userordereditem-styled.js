@@ -14,6 +14,14 @@ export const OrderInfo = styled.div``;
 export const ItemWrapper = styled.div`
   display: flex;
   margin: 20px 0;
+
+  a {
+    text-decoration: none;
+    transition: 0.3s all;
+  }
+  a:hover {
+    opacity: 0.7;
+  }
 `;
 export const ItemImageWrapeer = styled.div`
   width: 160px;

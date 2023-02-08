@@ -14,12 +14,4 @@ export const TitleWrapper = styled.div`
   }
 `;
 
-export const OrderedItemListWrapper = styled.div`
-  a {
-    text-decoration: none;
-    transition: 0.3s all;
-  }
-  a:hover {
-    opacity: 0.7;
-  }
-`;
+export const OrderedItemListWrapper = styled.div``;

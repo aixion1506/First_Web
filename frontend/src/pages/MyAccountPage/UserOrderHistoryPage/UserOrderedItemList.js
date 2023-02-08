@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { OrderedItemListWrapper } from "./userorderhistory-styled";
 import UserOrderedItem from "./UserOrderedItem";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
+import { getUserId } from "../../../utils";
 
 const dummy = [
   {
@@ -80,12 +83,40 @@ const dummy = [
 ];
 
 const UserOrderedItemList = () => {
+  const [orderedList, setOrderedList] = useState([]);
+  const [products, setProducs] = useState([]);
+
+  // const userId = "63e1c775c6347f1d522e3cd1";
+
+  const getOrderedList = async (token, userId) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8001/api/order/${userId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setOrderedList(response.data);
+      console.log(response.data);
+    } catch (err) {
+      console.log("Error", err);
+    }
+  };
+
+  useEffect(() => {
+    const userId = getUserId();
+    const token = localStorage.getItem("token");
+
+    getOrderedList(token, userId);
+  }, []);
+
   //   console.log(dummy);
   return (
     <OrderedItemListWrapper>
-      {dummy.map((item) => (
-        <UserOrderedItem key={item.id} {...item} />
-      ))}
+      {orderedList &&
+        orderedList.map((item) => <UserOrderedItem key={item.id} {...item} />)}
     </OrderedItemListWrapper>
   );
 };
