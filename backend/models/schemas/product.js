@@ -40,11 +40,6 @@ const ProductSchema = new Schema({
   inventory: {
     type: new Schema(
       {
-        sizeXS: {
-          type: Number,
-          required: true,
-          min: 0,
-        },
         sizeS: {
           type: Number,
           required: true,
@@ -61,6 +56,11 @@ const ProductSchema = new Schema({
           min: 0,
         },
         sizeXL: {
+          type: Number,
+          required: true,
+          min: 0,
+        },
+        size2XL: {
           type: Number,
           required: true,
           min: 0,
