@@ -8,9 +8,6 @@ import { ROUTE_ARR } from "./routes/route";
 function App() {
   const [cart, setCart] = useState([])
 
-
-
-
   return (
     <>
       <Reset />
