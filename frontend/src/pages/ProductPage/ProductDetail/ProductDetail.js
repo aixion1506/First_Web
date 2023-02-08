@@ -1,31 +1,57 @@
-import React from "react";
-import { ProductDetailWrapper, ProductInfo, ProductImg } from "./product-styled";
+import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { useParams } from 'react-router-dom';
+import { ProductDetailWrapper, ProductImg, ProductInfo, Button } from "./productDetail-styled";
 import RadioBox from "./RadioBox";
-import queryString from "query-string";
+import Counter from './Counter';
+
 const Product = () => {
-  const qs = queryString.parse(window.location.search);
-  const size = {type: "size", option: ["small", "medium", "large", "xlarge", "xxlarge"]};
-  console.log(qs);
+  const [productDetail, setProductDetail] = useState({});
+  const { title } = useParams();
+
+  const size = {
+    type: "size",
+    option: ["small", "medium", "large", "xlarge", "xxlarge"]
+  };
+
+  const imgError = (e) => e.target.src="https://kuku-keke.com/wp-content/uploads/2020/04/2491_6.png";
+  
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await axios.get("http://localhost:8001/api/products");
+        const products = response.data;
+        const detail = products.filter(product => product.title === title)[0];
+        setProductDetail(detail);
+        console.log(detail)
+      } catch(err) {
+        console.log(`ERROR: ${err}`);
+      }
+    })();
+  }, []);
+
   return (
     <>
       <ProductDetailWrapper>
         <div>
           <ProductImg>
             <img
-              src={qs.imgurl}
-              alt={`Product ${qs.title}`}
+              src={productDetail.imageUrl}
+              alt={`Product ${productDetail.title}`}
+              onError={imgError}
             />
           </ProductImg>
           <ProductInfo>
             <div>
-              <p>{qs.title}</p>
-              <span>₩{qs.price}</span>
+              <p>{productDetail.title}</p>
+              <span>₩ {Number(productDetail.price).toLocaleString("ko-KR")}</span>
             </div>
             <div>
-              {/* <RadioBox options={size} /> */}
+              <Counter />
               <RadioBox options={size} />
-              <button>쇼핑백 담기</button>
-              <button>구매하기</button>
+              <Button black>쇼핑백 담기</Button>
+              <Button>구매하기</Button>
             </div>
             <div>
               <p>

@@ -57,18 +57,18 @@ export const ROUTE = {
     element: Order,
   },
   PRODUCT: {
-    path: "/product",
-    link: "/product",
+    path: "/product/:category",
+    link: "/product/:category",
     element: Product,
   },
   PRODUCTDETAIL: {
-    path: "/productDetail",
-    link: "/productDetail",
+    path: "/product/detail/:title",
+    link: "/product/detail/:title",
     element: ProductDetail,
   },
   CategoryManage: {
-    path: "/categorymanage",
-    link: "/categorymanage",
+    path: "/admin/categorymanage",
+    link: "/admin/categorymanage",
     element: CategoryManage,
   },
   MyAccount: {
