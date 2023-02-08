@@ -3,40 +3,12 @@ import { CartWrapper, CartList, PayInfo } from "./styled";
 import CartItem from "./CartItem"
 const Cart = ({ cart, setCart }) => {
   const [carts, setCarts] = useState("");
-  // const [count, setCount] = useState(0);
-
-  // const increase = (e) => {
-  //   e.preventDefault();
-  //   setCount((current) => current += 1)
-  // }
-  // const decrease = (e) => {
-  //   e.preventDefault();
-  //   setCount((current) => current -= 1);
-  // }
 
   useEffect(() => {
     setCarts(JSON.parse(localStorage.getItem("cart")));
     console.log(cart)
   }, [])
 
-
-
-  // 장바구니 전체 삭제
-  // const removeAll = () => {
-  //   localStorage.clear();
-  // }
-
-  // 총 합계
-  // function getTotal() {
-  //   let temp = localCart.map(function (item) {
-  //     return parseInt(item.price);
-  //   })
-
-  //   let sum = temp.reduce(function (prev, next) {
-  //     return prev + next;
-  //   }, 0);
-  //   console.log(sum);
-  // }
 
   return (
     <>
