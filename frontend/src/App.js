@@ -19,6 +19,7 @@ import MyAccount from "./pages/MyAccountPage/MyAccount";
 import MyDetails from "./pages/MyAccountPage/MyDetailsPage/MyDetails";
 import OrderHistory from "./pages/MyAccountPage/OrderHistoryPage/OrderHistory";
 import Productlist from "./pages/Productlistpage/Productlist";
+import Orderlist from "./pages/Orderlistpage/Orderlist";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path="/myaccount/mydetails" element={<MyDetails />} />
         <Route path="/myaccount/orderhistory" element={<OrderHistory />} />
         <Route path="/productlist" element={<Productlist />} />
+        <Route path="/orderlist" element={<Orderlist />} />
       </Routes>
     </>
   );
