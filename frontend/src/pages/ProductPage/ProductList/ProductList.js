@@ -31,7 +31,7 @@ const Product = () => {
             productList.map(item => {
               return (
                 <li key={item._id}>
-                  <LinkStyle to={`/product/detail/${item.title}`}>
+                  <LinkStyle to={`/product/detail/${item._id}`}>
                     { 
                       item.imageUrl &&
                       <img
