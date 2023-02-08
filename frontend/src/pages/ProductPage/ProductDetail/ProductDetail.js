@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { ProductDetailWrapper, ProductInfo, ProductImg } from "./product-styled";
+import {
+  ProductDetailWrapper,
+  ProductInfo,
+  ProductImg,
+} from "./product-styled";
 import RadioBox from "./RadioBox";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";

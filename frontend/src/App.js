@@ -23,6 +23,7 @@ function App() {
             // <Route path={route.path} element={<route.element />} key={index} />
           );
         })}
+
       </Routes>
     </>
   );
