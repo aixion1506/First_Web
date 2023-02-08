@@ -9,7 +9,7 @@ const OrderSchema = new Schema(
     },
     userId: {
       type: Schema.Types.ObjectId,
-      ref: "user",
+      ref: "users",
       required: true,
     },
     status: {
@@ -35,6 +35,10 @@ const OrderSchema = new Schema(
     },
     phoneNumber: {
       type: Number,
+    },
+    orderProductId: {
+      type: Schema.Types.ObjectId,
+      ref: "orderProducts",
     },
   },
   { timeStamps: true },
