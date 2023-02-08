@@ -1,17 +1,17 @@
-import React from 'react';
+import React from "react";
 import { CategoryWrapper } from "./styled";
 
 const CategoryManage = () => {
   const cetegoryList = [];
-  for(let i = 0; i < 5; i++) {
+  for (let i = 0; i < 5; i++) {
     const category = (
       <li>
         <input type="text" placeholder="CATEGORY NAME" disabled />
         <button>UPDATE</button>
         <button>DELETE</button>
       </li>
-    )
-    cetegoryList.push(category)
+    );
+    cetegoryList.push(category);
   }
   return (
     <>
@@ -26,9 +26,7 @@ const CategoryManage = () => {
             </div>
           </div>
           <div>
-            <ul>
-              {cetegoryList}
-            </ul>
+            <ul>{cetegoryList}</ul>
           </div>
         </form>
       </CategoryWrapper>
