@@ -10,7 +10,7 @@ import {
   ItemInfo,
   OrderStatus,
 } from "./userordereditem-styled";
-import { timeFormat } from "../../../utils";
+import { timeFormat } from "../../../utils/utils";
 import { ROUTE } from "../../../routes/route";
 
 const UserOrderedItem = (item) => {

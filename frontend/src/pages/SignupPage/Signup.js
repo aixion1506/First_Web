@@ -5,6 +5,7 @@ import { InputWrapper, Button } from "../../components/common-styled";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { post } from "../../utils/api";
 
 /**
  * 유효성검사
@@ -66,6 +67,7 @@ const Signup = () => {
 
   /** 회원가입 */
   const register = async () => {
+    // await post()
     try {
       await axios.post("http://localhost:8001/api/users/register", {
         name,

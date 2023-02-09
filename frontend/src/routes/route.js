@@ -15,6 +15,7 @@ import USERORDERHISTORY from "../pages/MyAccountPage/UserOrderHistoryPage/UserOr
 import Productlist from "../pages/Productlistpage/Productlist";
 import Admin from "../pages/AdminPage/Admin";
 import UserOrderedDetail from "../pages/MyAccountPage/UserOrderHistoryPage/UserOrderedDetailPage/UserOrderedDetail";
+import Orderlist from "../pages/Orderlistpage/Orderlist";
 
 export const ROUTE = {
   HOME: {
@@ -43,48 +44,48 @@ export const ROUTE = {
     element: Cart,
   },
   PRODUCTADD: {
-    path: "/product/add",
-    link: "/product/add",
+    path: "/admin/product/add",
+    link: "/admin/product/add",
     element: Productadd,
   },
   PRODUCTEDIT: {
-    path: "/productedit",
-    link: "/productedit",
+    path: "/admin/product/edit",
+    link: "/admin/product/edit",
     element: Productedit,
   },
   ORDER: {
-    path: "/order",
-    link: "/order",
+    path: "/order/:id",
+    link: "/order/:id",
     element: Order,
   },
   PRODUCT: {
-    path: "/product",
-    link: "/product",
+    path: "/product/:category",
+    link: "/product/:category",
     element: Product,
   },
   PRODUCTDETAIL: {
-    path: "/product/detail",
-    link: "/product/detail",
+    path: "/product/detail/:id",
+    link: "/product/detail/:id",
     element: ProductDetail,
   },
-  CATEGORYMANAGE: {
+  CategoryManage: {
     path: "/admin/category/manage",
     link: "/admin/category/manage",
     element: CategoryManage,
   },
   MYACCOUNT: {
-    path: "/account",
-    link: "/account",
+    path: "/myaccount",
+    link: "/myaccount",
     element: MyAccount,
   },
   MYDETIALS: {
-    path: "/account/detail",
-    link: "/account/detail",
+    path: "/myaccount/detail",
+    link: "/myaccount/detail",
     element: MyDetails,
   },
   USERORDERHISTORY: {
-    path: "/account/order",
-    link: "/account/order",
+    path: "/myaccount/order",
+    link: "/myaccount/order",
     element: USERORDERHISTORY,
   },
   USERORDEREDDETAIL: {
@@ -93,14 +94,19 @@ export const ROUTE = {
     element: UserOrderedDetail,
   },
   PRODUCTLIST: {
-    path: "/product/list",
-    link: "/product/list",
+    path: "/admin/product/list",
+    link: "/admin/product/list",
     element: Productlist,
   },
   ADMIN: {
     path: "/admin",
     link: "/admin",
     element: Admin,
+  },
+  Orderlist: {
+    path: "/orderlist",
+    link: "/orderlist",
+    element: Orderlist,
   },
 };
 

@@ -1,45 +1,55 @@
-import React, {useState} from 'react';
-import {CartWrapper, CartList, PayInfo} from "./styled";
+import React, { useEffect, useState } from 'react';
+import { useLocation, Link } from 'react-router-dom';
+import { CartWrapper, CartList, PayInfo } from "./styled";
+import CartItem from "./CartItem"
+import jwt_decode from "jwt-decode";
+const Cart = ({ cart, setCart }) => {
+  const token = localStorage.getItem("token");
+  const decoded = jwt_decode(token);
+  const { userId } = decoded;
+  const [carts, setCarts] = useState("");
+  let [price, setPrice] = useState(0);
+  let [count, setCount] = useState(0);
+  let [total, setTotal] = useState(0);
+  useEffect(() => {
+    setCarts(JSON.parse(localStorage.getItem("cart")));
+  }, [])
 
-const Cart = () => {
-  const carts = [];
-  const [count, setCount] = useState(0);
 
-  const increase = (e) => {
-    e.preventDefault();
-    setCount((current) => current += 1)
+  // 총 가격
+  const getTotalPrice = () => {
+    return carts.reduce((tot, el) =>
+      tot + (el.price * el.quantity)
+      , 0)
   }
-  const decrease = (e) => {
-    e.preventDefault();
-    setCount((current) => current -= 1);
+  const getTotalCount = () => {
+    return carts.reduce((tot, el) =>
+      tot + (el.quantity)
+      , 0)
   }
 
-  for(let i = 0; i < 5; i++) {
-    const cart = (
-      <li>
-        <input type="checkbox" id="" />
-        <img
-          src="https://www.ganni.com/dw/image/v2/AAWT_PRD/on/demandware.static/-/Sites-ganni-master-catalogue/default/dw2194b9cd/images/images/packshots/K1829-554-1.jpg?sh=2000"
-          alt="Product"
-        />
-        <div>
-          <p>HAIR BAND</p>
-          <p>HAIR BAND LOGO METALLIC NEEDLEWORK_NAVY GOLD</p>
-          <p>₩280,000</p>
-          <div>
-            <button onClick={decrease}>-</button>
-            <span>{count}</span>
-            <button onClick={increase}>+</button>
-          </div> 
-        </div>
-        <p>DELETE</p>
-      </li>
-    );
-    carts.push(cart);
-  }
+  // 상품 수
+
+  useEffect(() => {
+
+    carts && setPrice(getTotalPrice());
+    carts && setCount(getTotalCount());
+    carts && setTotal(getTotalCount());
+
+    // console.log(count)
+  }, [carts])
+  // const countAll = () => {
+  //   carts.forEach((el) => setCount(count += el.price))
+  // }
+
+  // { carts.forEach(function (el) { setCount(count += el.price) }) }
+
+
   return (
     <>
       <CartWrapper>
+
+
         <div>
           <p>
             <span>장바구니</span> &#62; 주문결제 &#62; 주문완료{" "}
@@ -51,7 +61,12 @@ const Cart = () => {
               <input type="checkbox" id="allcheck" />
               <label htmlFor="allcheck">ALL</label>
               <ul>
-                {carts}
+                {carts && carts.map((item) =>
+                  (<CartItem key={item._id} {...item} />)
+                )}
+                {/* {carts && carts.map((item) =>
+                  console.log(item.price)
+                )} */}
               </ul>
             </form>
           </CartList>
@@ -59,14 +74,18 @@ const Cart = () => {
             <div>
               <p>결제정보</p>
               <ul>
-                <li>상품수</li>
-                <li>상품 금액</li>
-                <li>배송비</li>
+                <li>상품수 {count} </li>
+                <li>상품 금액 {price}</li>
+                <li>배송비 3,000</li>
               </ul>
-              <p>총 결제금액</p>
+              <p>총 결제금액{total}</p>
             </div>
-            <button>쇼핑백 비우기</button>
-            <button>주문 하기</button>
+            {/* <button onClick={removeAll}>쇼핑백 비우기</button> */}
+            <Link to={`http://localhost:3000/order/${userId}`} state={{
+              total,
+              price,
+              count,
+            }}>주문하기</Link>
           </PayInfo>
         </div>
       </CartWrapper>

@@ -6,8 +6,9 @@ import { useCallback } from "react";
 import { LoginWrapper, LoginForm, GotoSingup } from "./styled";
 import { InputWrapper, Button } from "../../components/common-styled";
 import { LayoutWrapper } from "../../components/common-styled";
+import { post } from "../../utils/api";
 
-import { loginAPI } from "../../api/user";
+import { getUserId } from "../../utils/utils";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -17,23 +18,17 @@ const Login = () => {
   const navigate = useNavigate();
 
   /** 로그인 API */
-  // const login = () => {
-  //   axios
-  //     .post("http://localhost:8001/api/users/login", {
-  //       email: email,
-  //       password: password,
-  //     })
-  //     .then((response) => {
-  //       // Handle success.
-  //       console.log(response);
-  //       localStorage.setItem("token", response.data.token);
-  //     })
-  //     .catch((error) => {
-  //       // Handle error.
-  //       console.log("An error occurred:", error.response);
-  //       return alert("아이디 또는 비밀번호를 확인해주세요");
-  //     });
-  // };
+  const loginAPI = async (data) => {
+    try {
+      const response = await post("/users/login", data);
+      console.log(response);
+      localStorage.setItem("token", response.data.token);
+      console.log(getUserId());
+    } catch (err) {
+      console.log("Error", err.response);
+      console.log("아이디 또는 비밀번호를 확인해주세요");
+    }
+  };
 
   /** 로그인 제출 */
   const loginSubmit = useCallback(

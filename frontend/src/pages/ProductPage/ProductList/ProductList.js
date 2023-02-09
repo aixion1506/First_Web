@@ -1,37 +1,50 @@
 import axios from "axios";
 import React, { useEffect, useState } from 'react';
-import { ProductWrapper, LinkStyle } from "./styled";
+import { useParams } from 'react-router-dom';
+import { LinkStyle, ProductWrapper } from "./styled";
 
 const Product = () => {
   const [productList, setProductList] = useState([]);
+  const { category } = useParams();
+
+  const imgError = (e) => e.target.src="https://kuku-keke.com/wp-content/uploads/2020/04/2491_6.png";
+
   useEffect(() => {
     (async () => {
       try {
-        const response = await axios.get("https://vercel-express-pied-kappa.vercel.app/prod?pageNumber=1&pageSize=50");
-        const products = response.data.content;
-        setProductList(products);
+        const response = await axios.get("http://localhost:8001/api/products");
+        const products = response.data;
+        const compare = products.filter(product => product.categoryId === category)
+        setProductList(compare);
       } catch(err) {
         console.log(`ERROR: ${err}`);
       }
     })();
-  }, []);
+  }, [category]);
 
   return (
     <>
       <ProductWrapper>
         <ul>
           { 
+            productList &&
             productList.map(item => {
               return (
-                <li key={item.prodId}>
-                  <LinkStyle to={`/product/detail?name=${item.prodName}&imgsrc=${item.prodImageUrl}`}>
-                    <img
-                      src={item.prodImageUrl}
-                      alt={`Product ${item.prodName}`}
-                    />
+                <li key={item._id}>
+                  <LinkStyle to={`/product/detail/${item._id}`}>
+                    { 
+                      item.imageUrl &&
+                      <img
+                        src={item.imageUrl}
+                        alt={`Product ${item.title}`}
+                        onError={imgError}
+                      />
+                    }
                     <div>
-                      <p>{item.prodName}</p>
-                      <span>₩280,000</span>
+                      <p>{item.title}</p>
+                      <span>
+                        ₩ {Number(item.price).toLocaleString("ko-KR")}
+                        </span>
                     </div>
                   </LinkStyle>
                 </li>

@@ -4,7 +4,7 @@ import UserOrderedItem from "./UserOrderedItem";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-import { getUserId } from "../../../utils";
+import { getUserId } from "../../../utils/utils";
 
 const dummy = [
   {
