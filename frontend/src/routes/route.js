@@ -69,8 +69,13 @@ export const ROUTE = {
     element: ProductDetail,
   },
   CategoryManage: {
+<<<<<<< HEAD
     path: "/admin/category/manage",
     link: "/admin/category/manage",
+=======
+    path: "/admin/categorymanage",
+    link: "/admin/categorymanage",
+>>>>>>> upstream/client
     element: CategoryManage,
   },
   MYACCOUNT: {
