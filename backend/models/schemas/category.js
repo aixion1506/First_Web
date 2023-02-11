@@ -4,6 +4,7 @@ const CategorySchema = new Schema({
   title: {
     type: String,
     required: true,
+    trim: true,
   },
 });
 

@@ -1,37 +1,41 @@
 import dotenv from "dotenv";
-import createError from "http-errors";
 import express from "express";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import cors from "cors";
 import cookieParser from "cookie-parser";
-import logger from "morgan";
+import morgan from "morgan";
 import mongoose from "mongoose";
 import path from "path";
-import { userRouter } from "./routes/index";
-import createError from "http-errors";
-import express from "express";
-import cookieParser from "cookie-parser";
-import logger from "morgan";
-import mongoose from "mongoose";
-import path from "path";
-import { userRouter } from "./routes/index";
-import { indexRouter, productRouter, categoryRouter, orderRouter, orderProductRouter } from "./routes/index";
+import {
+  adminRouter,
+  userRouter,
+  productRouter,
+  categoryRouter,
+  orderRouter,
+  orderProductRouter,
+} from "./routes";
+import { errorHandler, errorLogger } from "./middleware";
+dotenv.config();
 
 // 환경변수 사용
-dotenv.config();
 const port = process.env.SERVER_PORT;
+
 const app = express();
-
 const dirname = path.resolve();
+console.log(dirname, "dirname");
+app.set("port", process.env.PORT || 8001);
 
-const dirname = path.resolve();
+// CORS 에러 방지
+const options = {
+  origin: "https://shopping-mall-client-git-dev-client-elice-ai6-7team.vercel.app", // 접근 권한을 부여하는 도메인
+  credentials: true, // 응답 헤더에 Access-Control-Allow-Credentials 추가
+  optionsSuccessStatus: 200, // 응답 상태 200으로 설정
+};
 
-const dirname = path.resolve();
+app.use(cors(options));
 
-app.set("port", process.env.PORT || 8010);
-// view engine setup
-app.set("views", path.join(dirname, "views"));
-app.set("view engine", "pug");
-
-app.use(logger("dev"));
+// logger (morgan)
+app.use(morgan("dev"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -39,43 +43,31 @@ app.use(cookieParser());
 app.use(express.static(path.join(dirname, "public")));
 
 app.use("/api", userRouter);
-app.use("/", indexRouter);
-// app.use('/users', usersRouter);
-app.use("/products", productRouter);
-app.use("/categories", categoryRouter);
-app.use("/order", orderRouter);
-app.use("/order/product", orderProductRouter);
+app.use("/api", adminRouter);
+app.use("/api", productRouter);
+app.use("/api", categoryRouter);
+app.use("/api", orderRouter);
+app.use("/api", orderProductRouter);
+// app.use("/", indexRouter);
 
-// catch 404 and forward to error handler
-app.use((req, res, next) => {
-  next(createError(404));
+app.get("/", (req, res) => {
+  res.send("<h1>백엔드 페이지, /api/....<h1>");
 });
 
-//  DB 만들고 연결할 주소
-
+// DB 만들고 연결할 주소
 mongoose.connect(process.env.DB_URL);
 
 mongoose.connection.on("connected", () => {
   console.log("MongoDB Connected");
 });
-mongoose.connection.on("connected", () => {
-  console.log("MongoDB Connected");
-});
 
+// catch 404 and forward to error handler
+app.use(errorLogger);
 // error handler
-app.use((err, req, res) => {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render("error");
-});
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`${port}번 포트에서 대기중 🚀`);
 });
 
-export default app;
 export default app;

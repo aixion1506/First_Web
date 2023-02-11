@@ -1,16 +1,23 @@
 import express from "express";
-import {
-  addOrderProduct,
-  getOrderProduct,
-  setOrderProduct,
-  deleteOrderProduct,
-} from "../controllers/orderProductController";
+import { orderProductController } from "../controllers";
+import { loginRequired } from "../middleware";
 
 const orderProductRouter = express.Router();
 
-orderProductRouter.post("/add", addOrderProduct);
-orderProductRouter.get("/get", getOrderProduct);
-orderProductRouter.patch("/change", setOrderProduct);
-orderProductRouter.delete("/delete", deleteOrderProduct);
+orderProductRouter.post(
+  "/order/product",
+  loginRequired,
+  orderProductController.addOrderProduct,
+);
+orderProductRouter.get(
+  "/order/product/:orderId",
+  loginRequired,
+  orderProductController.getOrderProduct,
+);
+orderProductRouter.delete(
+  "/order/product/:orderId",
+  loginRequired,
+  orderProductController.deleteOrderProduct,
+);
 
 export default orderProductRouter;

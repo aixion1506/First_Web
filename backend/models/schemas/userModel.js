@@ -1,5 +1,5 @@
 import { model } from "mongoose";
-import { UserSchema } from "./user";
+import UserSchema from "./user";
 
 const User = model("users", UserSchema);
 
@@ -31,7 +31,6 @@ export class UserModel {
 
   async update({ userId, update }) {
     const filter = { _id: userId };
-    console.log(update, "models");
     const updatedUser = await User.update(filter, { $set: update });
     return updatedUser;
   }

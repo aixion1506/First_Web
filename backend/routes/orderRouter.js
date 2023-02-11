@@ -1,18 +1,17 @@
 import express from "express";
-import {
-  addOrder,
-  getOrderAdmin,
-  getOrderUser,
-  setOrder,
-  deleteOrder,
-} from "../controllers/orderController";
+import { orderController } from "../controllers";
+import { loginRequired, isAdmin } from "../middleware";
 
 const orderRouter = express.Router();
 
-orderRouter.post("/add", addOrder);
-orderRouter.get("/orderlist/admin", getOrderAdmin);
-orderRouter.get("/orderlist/user", getOrderUser);
-orderRouter.patch("/orderlist/change", setOrder);
-orderRouter.delete("/delete", deleteOrder);
+orderRouter.post("/order", loginRequired, orderController.addOrder);
+orderRouter.get("/order", isAdmin, orderController.getOrderAdmin);
+orderRouter.get("/order/:userId", loginRequired, orderController.getOrderUser);
+orderRouter.patch("/order/:orderId", loginRequired, orderController.setOrder);
+orderRouter.delete(
+  "/order/:orderId",
+  loginRequired,
+  orderController.deleteOrder,
+);
 
 export default orderRouter;

@@ -1,29 +1,54 @@
 import { Order } from "../models";
 
-export const addOrderService = async orderInfo => {
-  const createdNewOrder = await Order.create(orderInfo);
+class OrderService {
+  constructor(orderModel) {
+    this.orderModel = orderModel;
+    this.addOrder = this.addOrder.bind(this);
+    this.getOrderAdmin = this.getOrderAdmin.bind(this);
+    this.getOrderUser = this.getOrderUser.bind(this);
+    this.setOrder = this.setOrder.bind(this);
+    this.deleteOrder = this.deleteOrder.bind(this);
+  }
 
-  return createdNewOrder;
-};
+  async addOrder(orderInfo) {
+    const createdNewOrder = await this.orderModel.create(orderInfo);
+    return createdNewOrder;
+  }
 
-export const getOrderAdminService = async () => {
-  const orderList = await Order.find();
-  return orderList;
-};
+  async getOrderAdmin() {
+    const orderList = await this.orderModel.find().populate("userId");
+    return orderList;
+  }
 
-export const getOrderUserService = async userId => {
-  const orderList = await Order.find({ userId });
-  return orderList;
-};
+  async getOrderUser(userId) {
+    const orderList = await this.orderModel.find({ userId });
+    return orderList;
+  }
 
-export const setOrderService = async (orderId, changeInfo) => {
-  const changedOrder = await Order.updateOne({ orderId }, { $set: changeInfo });
+  async setOrder(orderId, changeInfo) {
+    const order = await this.orderModel.findOne({ _id: orderId });
+    if (!order) {
+      throw new Error("주문이 존재하지 않습니다.");
+    }
 
-  return changedOrder;
-};
+    const changedOrder = await this.orderModel.updateOne(
+      { _id: orderId },
+      { $set: changeInfo },
+    );
+    return changedOrder;
+  }
 
-export const deleteOrderService = async orderId => {
-  const orderDeleted = await Order.deleteOne({ orderId });
+  async deleteOrder(orderId) {
+    const { deletedCount } = await this.orderModel.deleteOne({ _id: orderId });
 
-  return orderDeleted;
-};
+    if (deletedCount === 0) {
+      throw new Error("주문 삭제에 실패했습니다.");
+    }
+
+    return { result: "주문 삭제 완료" };
+  }
+}
+
+const orderService = new OrderService(Order);
+
+export { orderService };

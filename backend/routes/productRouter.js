@@ -1,15 +1,27 @@
 import express from "express";
 import { productController } from "../controllers";
+import { isAdmin } from "../middleware";
 
 const productRouter = express.Router();
 
-productRouter.post("/add", productController.addProduct);
-productRouter.get("/", productController.getProducts);
+productRouter.post("/products/add", isAdmin, productController.addProduct);
+productRouter.patch(
+  "/products/:productId",
+  isAdmin,
+  productController.setProduct,
+);
+//
+productRouter.get("/products", productController.getProducts);
+//
 productRouter.get(
-  "/category/:categoryTitle",
+  "/products/category/:categoryId",
   productController.getProductsByCategory,
 );
-productRouter.get("/:productTitle", productController.getProduct);
-productRouter.delete("/:productTitle", productController.deleteProduct);
+productRouter.get("/products/:productId", productController.getProduct);
+productRouter.delete(
+  "/products/:productId",
+  isAdmin,
+  productController.deleteProduct,
+);
 
 export default productRouter;
